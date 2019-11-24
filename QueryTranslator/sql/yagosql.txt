@@ -1,0 +1,528 @@
+#####
+q1(1)
+>>>>>
+hasAcademicAdvisor	isLocatedIn	rdfs_label	wasBornIn
+>>>>>
+SELECT Table_1.hasGivenName AS GivenName, Table_1.hasFamilyName AS FamilyName FROM
+(SELECT s FROM isLocatedIn
+LATERAL VIEW EXPLODE(isLocatedIn) EXPLODED_NAMES AS isLocatedIn_lve
+WHERE isLocatedIn_lve = 'United_States')
+AS Table_5
+JOIN
+(SELECT s, wasBornIn FROM wasBornIn
+WHERE wasBornIn IS NOT NULL)
+AS Table_4 ON (Table_4.wasBornIn = Table_5.s)
+JOIN
+(SELECT s, hasGivenName, hasFamilyName, rdf_type_lve, wasBornIn, hasAcademicAdvisor_lve FROM hasAcademicAdvisor
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(hasAcademicAdvisor) EXPLODED_NAMES AS hasAcademicAdvisor_lve
+WHERE hasGivenName IS NOT NULL AND hasFamilyName IS NOT NULL AND rdf_type_lve IS NOT NULL AND wasBornIn IS NOT NULL AND hasAcademicAdvisor_lve IS NOT NULL)
+AS Table_1 ON (Table_1.hasAcademicAdvisor_lve = Table_4.s)
+JOIN
+(SELECT s FROM isLocatedIn
+LATERAL VIEW EXPLODE(isLocatedIn) EXPLODED_NAMES AS isLocatedIn_lve
+WHERE isLocatedIn_lve = 'France')
+AS Table_3 ON (Table_3.s = Table_1.wasBornIn)
+JOIN
+(SELECT s FROM rdfs_label
+LATERAL VIEW EXPLODE(rdfs_label) EXPLODED_NAMES AS rdfs_label_lve
+WHERE rdfs_label_lve = 'scientist')
+AS Table_2 ON (Table_2.s = Table_1.rdf_type_lve)
+#####
+q1(2)
+>>>>>
+hasAcademicAdvisor	isLocatedIn	rdfs_label	wasBornIn
+>>>>>
+SELECT Table_1.hasGivenName AS GivenName, Table_1.hasFamilyName AS FamilyName FROM
+(SELECT s FROM isLocatedIn
+LATERAL VIEW EXPLODE(isLocatedIn) EXPLODED_NAMES AS isLocatedIn_lve
+WHERE isLocatedIn_lve = 'United_States')
+AS Table_5
+JOIN
+(SELECT s, wasBornIn FROM wasBornIn
+WHERE wasBornIn IS NOT NULL)
+AS Table_4 ON (Table_4.wasBornIn = Table_5.s)
+JOIN
+(SELECT s, hasGivenName, hasFamilyName, rdf_type_lve, wasBornIn, hasAcademicAdvisor_lve FROM hasAcademicAdvisor
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(hasAcademicAdvisor) EXPLODED_NAMES AS hasAcademicAdvisor_lve
+WHERE hasGivenName IS NOT NULL AND hasFamilyName IS NOT NULL AND rdf_type_lve IS NOT NULL AND wasBornIn IS NOT NULL AND hasAcademicAdvisor_lve IS NOT NULL)
+AS Table_1 ON (Table_1.hasAcademicAdvisor_lve = Table_4.s)
+JOIN
+(SELECT s FROM isLocatedIn
+LATERAL VIEW EXPLODE(isLocatedIn) EXPLODED_NAMES AS isLocatedIn_lve
+WHERE isLocatedIn_lve = 'France')
+AS Table_3 ON (Table_3.s = Table_1.wasBornIn)
+JOIN
+(SELECT s FROM rdfs_label
+LATERAL VIEW EXPLODE(rdfs_label) EXPLODED_NAMES AS rdfs_label_lve
+WHERE rdfs_label_lve = 'scientist')
+AS Table_2 ON (Table_2.s = Table_1.rdf_type_lve)
+#####
+q1(3)
+>>>>>
+hasAcademicAdvisor	isLocatedIn	rdfs_label	wasBornIn
+>>>>>
+SELECT Table_1.hasGivenName AS GivenName, Table_1.hasFamilyName AS FamilyName FROM
+(SELECT s FROM isLocatedIn
+LATERAL VIEW EXPLODE(isLocatedIn) EXPLODED_NAMES AS isLocatedIn_lve
+WHERE isLocatedIn_lve = 'United_States')
+AS Table_5
+JOIN
+(SELECT s, wasBornIn FROM wasBornIn
+WHERE wasBornIn IS NOT NULL)
+AS Table_4 ON (Table_4.wasBornIn = Table_5.s)
+JOIN
+(SELECT s, hasGivenName, hasFamilyName, rdf_type_lve, wasBornIn, hasAcademicAdvisor_lve FROM hasAcademicAdvisor
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(hasAcademicAdvisor) EXPLODED_NAMES AS hasAcademicAdvisor_lve
+WHERE hasGivenName IS NOT NULL AND hasFamilyName IS NOT NULL AND rdf_type_lve IS NOT NULL AND wasBornIn IS NOT NULL AND hasAcademicAdvisor_lve IS NOT NULL)
+AS Table_1 ON (Table_1.hasAcademicAdvisor_lve = Table_4.s)
+JOIN
+(SELECT s FROM isLocatedIn
+LATERAL VIEW EXPLODE(isLocatedIn) EXPLODED_NAMES AS isLocatedIn_lve
+WHERE isLocatedIn_lve = 'France')
+AS Table_3 ON (Table_3.s = Table_1.wasBornIn)
+JOIN
+(SELECT s FROM rdfs_label
+LATERAL VIEW EXPLODE(rdfs_label) EXPLODED_NAMES AS rdfs_label_lve
+WHERE rdfs_label_lve = 'scientist')
+AS Table_2 ON (Table_2.s = Table_1.rdf_type_lve)
+#####
+q1(4)
+>>>>>
+hasAcademicAdvisor	isLocatedIn	rdfs_label	wasBornIn
+>>>>>
+SELECT Table_1.hasGivenName AS GivenName, Table_1.hasFamilyName AS FamilyName FROM
+(SELECT s FROM isLocatedIn
+LATERAL VIEW EXPLODE(isLocatedIn) EXPLODED_NAMES AS isLocatedIn_lve
+WHERE isLocatedIn_lve = 'United_States')
+AS Table_5
+JOIN
+(SELECT s, wasBornIn FROM wasBornIn
+WHERE wasBornIn IS NOT NULL)
+AS Table_4 ON (Table_4.wasBornIn = Table_5.s)
+JOIN
+(SELECT s, hasGivenName, hasFamilyName, rdf_type_lve, wasBornIn, hasAcademicAdvisor_lve FROM hasAcademicAdvisor
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(hasAcademicAdvisor) EXPLODED_NAMES AS hasAcademicAdvisor_lve
+WHERE hasGivenName IS NOT NULL AND hasFamilyName IS NOT NULL AND rdf_type_lve IS NOT NULL AND wasBornIn IS NOT NULL AND hasAcademicAdvisor_lve IS NOT NULL)
+AS Table_1 ON (Table_1.hasAcademicAdvisor_lve = Table_4.s)
+JOIN
+(SELECT s FROM isLocatedIn
+LATERAL VIEW EXPLODE(isLocatedIn) EXPLODED_NAMES AS isLocatedIn_lve
+WHERE isLocatedIn_lve = 'France')
+AS Table_3 ON (Table_3.s = Table_1.wasBornIn)
+JOIN
+(SELECT s FROM rdfs_label
+LATERAL VIEW EXPLODE(rdfs_label) EXPLODED_NAMES AS rdfs_label_lve
+WHERE rdfs_label_lve = 'scientist')
+AS Table_2 ON (Table_2.s = Table_1.rdf_type_lve)
+#####
+q2(1)
+>>>>>
+directed	isLocatedIn	rdfs_label
+>>>>>
+SELECT Table_1.isCalled_lve AS name FROM
+(SELECT s, rdf_type_lve FROM isLocatedIn
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(isLocatedIn) EXPLODED_NAMES AS isLocatedIn_lve
+WHERE rdf_type_lve IS NOT NULL AND isLocatedIn_lve = 'Spain')
+AS Table_5
+JOIN
+(SELECT s, rdf_type_lve FROM isLocatedIn
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(isLocatedIn) EXPLODED_NAMES AS isLocatedIn_lve
+WHERE rdf_type_lve IS NOT NULL AND isLocatedIn_lve = 'Portugal')
+AS Table_3 ON (Table_3.rdf_type_lve = Table_5.rdf_type_lve)
+JOIN
+(SELECT s FROM rdfs_label
+LATERAL VIEW EXPLODE(rdfs_label) EXPLODED_NAMES AS rdfs_label_lve
+WHERE rdfs_label_lve = 'movie')
+AS Table_4 ON (Table_4.s = Table_5.rdf_type_lve AND Table_4.s = Table_3.rdf_type_lve)
+JOIN
+(SELECT s, isCalled_lve, rdf_type_lve, actedIn_lve, directed_lve FROM directed
+LATERAL VIEW EXPLODE(isCalled) EXPLODED_NAMES AS isCalled_lve
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(actedIn) EXPLODED_NAMES AS actedIn_lve
+LATERAL VIEW EXPLODE(directed) EXPLODED_NAMES AS directed_lve
+WHERE isCalled_lve IS NOT NULL AND rdf_type_lve IS NOT NULL AND actedIn_lve IS NOT NULL AND directed_lve IS NOT NULL)
+AS Table_1 ON (Table_1.directed_lve = Table_5.s AND Table_1.actedIn_lve = Table_3.s)
+JOIN
+(SELECT s FROM rdfs_label
+LATERAL VIEW EXPLODE(rdfs_label) EXPLODED_NAMES AS rdfs_label_lve
+WHERE rdfs_label_lve = 'actor')
+AS Table_2 ON (Table_2.s = Table_1.rdf_type_lve)
+#####
+q2(2)
+>>>>>
+directed	isLocatedIn	rdfs_label
+>>>>>
+SELECT Table_1.isCalled_lve AS name FROM
+(SELECT s, rdf_type_lve FROM isLocatedIn
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(isLocatedIn) EXPLODED_NAMES AS isLocatedIn_lve
+WHERE rdf_type_lve IS NOT NULL AND isLocatedIn_lve = 'Spain')
+AS Table_5
+JOIN
+(SELECT s, rdf_type_lve FROM isLocatedIn
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(isLocatedIn) EXPLODED_NAMES AS isLocatedIn_lve
+WHERE rdf_type_lve IS NOT NULL AND isLocatedIn_lve = 'Portugal')
+AS Table_3 ON (Table_3.rdf_type_lve = Table_5.rdf_type_lve)
+JOIN
+(SELECT s FROM rdfs_label
+LATERAL VIEW EXPLODE(rdfs_label) EXPLODED_NAMES AS rdfs_label_lve
+WHERE rdfs_label_lve = 'movie')
+AS Table_4 ON (Table_4.s = Table_5.rdf_type_lve AND Table_4.s = Table_3.rdf_type_lve)
+JOIN
+(SELECT s, isCalled_lve, rdf_type_lve, actedIn_lve, directed_lve FROM directed
+LATERAL VIEW EXPLODE(isCalled) EXPLODED_NAMES AS isCalled_lve
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(actedIn) EXPLODED_NAMES AS actedIn_lve
+LATERAL VIEW EXPLODE(directed) EXPLODED_NAMES AS directed_lve
+WHERE isCalled_lve IS NOT NULL AND rdf_type_lve IS NOT NULL AND actedIn_lve IS NOT NULL AND directed_lve IS NOT NULL)
+AS Table_1 ON (Table_1.directed_lve = Table_5.s AND Table_1.actedIn_lve = Table_3.s)
+JOIN
+(SELECT s FROM rdfs_label
+LATERAL VIEW EXPLODE(rdfs_label) EXPLODED_NAMES AS rdfs_label_lve
+WHERE rdfs_label_lve = 'actor')
+AS Table_2 ON (Table_2.s = Table_1.rdf_type_lve)
+#####
+q2(3)
+>>>>>
+directed	isLocatedIn	rdfs_label
+>>>>>
+SELECT Table_1.isCalled_lve AS name FROM
+(SELECT s, rdf_type_lve FROM isLocatedIn
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(isLocatedIn) EXPLODED_NAMES AS isLocatedIn_lve
+WHERE rdf_type_lve IS NOT NULL AND isLocatedIn_lve = 'Spain')
+AS Table_5
+JOIN
+(SELECT s, rdf_type_lve FROM isLocatedIn
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(isLocatedIn) EXPLODED_NAMES AS isLocatedIn_lve
+WHERE rdf_type_lve IS NOT NULL AND isLocatedIn_lve = 'Portugal')
+AS Table_3 ON (Table_3.rdf_type_lve = Table_5.rdf_type_lve)
+JOIN
+(SELECT s FROM rdfs_label
+LATERAL VIEW EXPLODE(rdfs_label) EXPLODED_NAMES AS rdfs_label_lve
+WHERE rdfs_label_lve = 'movie')
+AS Table_4 ON (Table_4.s = Table_5.rdf_type_lve AND Table_4.s = Table_3.rdf_type_lve)
+JOIN
+(SELECT s, isCalled_lve, rdf_type_lve, actedIn_lve, directed_lve FROM directed
+LATERAL VIEW EXPLODE(isCalled) EXPLODED_NAMES AS isCalled_lve
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(actedIn) EXPLODED_NAMES AS actedIn_lve
+LATERAL VIEW EXPLODE(directed) EXPLODED_NAMES AS directed_lve
+WHERE isCalled_lve IS NOT NULL AND rdf_type_lve IS NOT NULL AND actedIn_lve IS NOT NULL AND directed_lve IS NOT NULL)
+AS Table_1 ON (Table_1.directed_lve = Table_5.s AND Table_1.actedIn_lve = Table_3.s)
+JOIN
+(SELECT s FROM rdfs_label
+LATERAL VIEW EXPLODE(rdfs_label) EXPLODED_NAMES AS rdfs_label_lve
+WHERE rdfs_label_lve = 'actor')
+AS Table_2 ON (Table_2.s = Table_1.rdf_type_lve)
+#####
+q2(4)
+>>>>>
+directed	isLocatedIn	rdfs_label
+>>>>>
+SELECT Table_1.isCalled_lve AS name FROM
+(SELECT s, rdf_type_lve FROM isLocatedIn
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(isLocatedIn) EXPLODED_NAMES AS isLocatedIn_lve
+WHERE rdf_type_lve IS NOT NULL AND isLocatedIn_lve = 'Spain')
+AS Table_5
+JOIN
+(SELECT s, rdf_type_lve FROM isLocatedIn
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(isLocatedIn) EXPLODED_NAMES AS isLocatedIn_lve
+WHERE rdf_type_lve IS NOT NULL AND isLocatedIn_lve = 'Portugal')
+AS Table_3 ON (Table_3.rdf_type_lve = Table_5.rdf_type_lve)
+JOIN
+(SELECT s FROM rdfs_label
+LATERAL VIEW EXPLODE(rdfs_label) EXPLODED_NAMES AS rdfs_label_lve
+WHERE rdfs_label_lve = 'movie')
+AS Table_4 ON (Table_4.s = Table_5.rdf_type_lve AND Table_4.s = Table_3.rdf_type_lve)
+JOIN
+(SELECT s, isCalled_lve, rdf_type_lve, actedIn_lve, directed_lve FROM directed
+LATERAL VIEW EXPLODE(isCalled) EXPLODED_NAMES AS isCalled_lve
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(actedIn) EXPLODED_NAMES AS actedIn_lve
+LATERAL VIEW EXPLODE(directed) EXPLODED_NAMES AS directed_lve
+WHERE isCalled_lve IS NOT NULL AND rdf_type_lve IS NOT NULL AND actedIn_lve IS NOT NULL AND directed_lve IS NOT NULL)
+AS Table_1 ON (Table_1.directed_lve = Table_5.s AND Table_1.actedIn_lve = Table_3.s)
+JOIN
+(SELECT s FROM rdfs_label
+LATERAL VIEW EXPLODE(rdfs_label) EXPLODED_NAMES AS rdfs_label_lve
+WHERE rdfs_label_lve = 'actor')
+AS Table_2 ON (Table_2.s = Table_1.rdf_type_lve)
+#####
+q3(1)
+>>>>>
+hasWonPrize	rdfs_label
+>>>>>
+SELECT DISTINCT Table_1.hasFamilyName AS name1, Table_2.hasFamilyName AS name2 FROM
+(SELECT s FROM rdfs_label
+LATERAL VIEW EXPLODE(rdfs_label) EXPLODED_NAMES AS rdfs_label_lve
+WHERE rdfs_label_lve = 'scientist')
+AS Table_3
+JOIN
+(SELECT s, hasFamilyName, rdf_type_lve, hasWonPrize_lve, wasBornIn FROM hasWonPrize
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(hasWonPrize) EXPLODED_NAMES AS hasWonPrize_lve
+WHERE hasFamilyName IS NOT NULL AND rdf_type_lve IS NOT NULL AND hasWonPrize_lve IS NOT NULL AND wasBornIn IS NOT NULL)
+AS Table_2 ON (Table_2.rdf_type_lve = Table_3.s)
+JOIN
+(SELECT s, hasFamilyName, rdf_type_lve, hasWonPrize_lve, wasBornIn FROM hasWonPrize
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(hasWonPrize) EXPLODED_NAMES AS hasWonPrize_lve
+WHERE hasFamilyName IS NOT NULL AND rdf_type_lve IS NOT NULL AND hasWonPrize_lve IS NOT NULL AND wasBornIn IS NOT NULL)
+AS Table_1 ON (Table_1.rdf_type_lve = Table_3.s AND Table_1.hasWonPrize_lve = Table_2.hasWonPrize_lve AND Table_1.wasBornIn = Table_2.wasBornIn AND Table_1.rdf_type_lve = Table_2.rdf_type_lve)
+WHERE Table_1.s != Table_2.s
+#####
+q3(2)
+>>>>>
+hasWonPrize	rdfs_label
+>>>>>
+SELECT DISTINCT Table_1.hasFamilyName AS name1, Table_2.hasFamilyName AS name2 FROM
+(SELECT s FROM rdfs_label
+LATERAL VIEW EXPLODE(rdfs_label) EXPLODED_NAMES AS rdfs_label_lve
+WHERE rdfs_label_lve = 'scientist')
+AS Table_3
+JOIN
+(SELECT s, hasFamilyName, rdf_type_lve, hasWonPrize_lve, wasBornIn FROM hasWonPrize
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(hasWonPrize) EXPLODED_NAMES AS hasWonPrize_lve
+WHERE hasFamilyName IS NOT NULL AND rdf_type_lve IS NOT NULL AND hasWonPrize_lve IS NOT NULL AND wasBornIn IS NOT NULL)
+AS Table_2 ON (Table_2.rdf_type_lve = Table_3.s)
+JOIN
+(SELECT s, hasFamilyName, rdf_type_lve, hasWonPrize_lve, wasBornIn FROM hasWonPrize
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(hasWonPrize) EXPLODED_NAMES AS hasWonPrize_lve
+WHERE hasFamilyName IS NOT NULL AND rdf_type_lve IS NOT NULL AND hasWonPrize_lve IS NOT NULL AND wasBornIn IS NOT NULL)
+AS Table_1 ON (Table_1.rdf_type_lve = Table_3.s AND Table_1.hasWonPrize_lve = Table_2.hasWonPrize_lve AND Table_1.wasBornIn = Table_2.wasBornIn AND Table_1.rdf_type_lve = Table_2.rdf_type_lve)
+WHERE Table_1.s != Table_2.s
+#####
+q3(3)
+>>>>>
+hasWonPrize	rdfs_label
+>>>>>
+SELECT DISTINCT Table_1.hasFamilyName AS name1, Table_2.hasFamilyName AS name2 FROM
+(SELECT s FROM rdfs_label
+LATERAL VIEW EXPLODE(rdfs_label) EXPLODED_NAMES AS rdfs_label_lve
+WHERE rdfs_label_lve = 'scientist')
+AS Table_3
+JOIN
+(SELECT s, hasFamilyName, rdf_type_lve, hasWonPrize_lve, wasBornIn FROM hasWonPrize
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(hasWonPrize) EXPLODED_NAMES AS hasWonPrize_lve
+WHERE hasFamilyName IS NOT NULL AND rdf_type_lve IS NOT NULL AND hasWonPrize_lve IS NOT NULL AND wasBornIn IS NOT NULL)
+AS Table_2 ON (Table_2.rdf_type_lve = Table_3.s)
+JOIN
+(SELECT s, hasFamilyName, rdf_type_lve, hasWonPrize_lve, wasBornIn FROM hasWonPrize
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(hasWonPrize) EXPLODED_NAMES AS hasWonPrize_lve
+WHERE hasFamilyName IS NOT NULL AND rdf_type_lve IS NOT NULL AND hasWonPrize_lve IS NOT NULL AND wasBornIn IS NOT NULL)
+AS Table_1 ON (Table_1.rdf_type_lve = Table_3.s AND Table_1.hasWonPrize_lve = Table_2.hasWonPrize_lve AND Table_1.wasBornIn = Table_2.wasBornIn AND Table_1.rdf_type_lve = Table_2.rdf_type_lve)
+WHERE Table_1.s != Table_2.s
+#####
+q3(4)
+>>>>>
+hasWonPrize	rdfs_label
+>>>>>
+SELECT DISTINCT Table_1.hasFamilyName AS name1, Table_2.hasFamilyName AS name2 FROM
+(SELECT s FROM rdfs_label
+LATERAL VIEW EXPLODE(rdfs_label) EXPLODED_NAMES AS rdfs_label_lve
+WHERE rdfs_label_lve = 'scientist')
+AS Table_3
+JOIN
+(SELECT s, hasFamilyName, rdf_type_lve, hasWonPrize_lve, wasBornIn FROM hasWonPrize
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(hasWonPrize) EXPLODED_NAMES AS hasWonPrize_lve
+WHERE hasFamilyName IS NOT NULL AND rdf_type_lve IS NOT NULL AND hasWonPrize_lve IS NOT NULL AND wasBornIn IS NOT NULL)
+AS Table_2 ON (Table_2.rdf_type_lve = Table_3.s)
+JOIN
+(SELECT s, hasFamilyName, rdf_type_lve, hasWonPrize_lve, wasBornIn FROM hasWonPrize
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(hasWonPrize) EXPLODED_NAMES AS hasWonPrize_lve
+WHERE hasFamilyName IS NOT NULL AND rdf_type_lve IS NOT NULL AND hasWonPrize_lve IS NOT NULL AND wasBornIn IS NOT NULL)
+AS Table_1 ON (Table_1.rdf_type_lve = Table_3.s AND Table_1.hasWonPrize_lve = Table_2.hasWonPrize_lve AND Table_1.wasBornIn = Table_2.wasBornIn AND Table_1.rdf_type_lve = Table_2.rdf_type_lve)
+WHERE Table_1.s != Table_2.s
+#####
+q4(1)
+>>>>>
+actedIn	isLocatedIn
+>>>>>
+SELECT DISTINCT Table_1.isCalled_lve AS name1, Table_2.isCalled_lve AS name2 FROM
+(SELECT s FROM isLocatedIn
+LATERAL VIEW EXPLODE(isLocatedIn) EXPLODED_NAMES AS isLocatedIn_lve
+WHERE isLocatedIn_lve = 'United_States')
+AS Table_3
+JOIN
+(SELECT s, isCalled_lve, wasBornIn, actedIn_lve FROM actedIn
+LATERAL VIEW EXPLODE(isCalled) EXPLODED_NAMES AS isCalled_lve
+LATERAL VIEW EXPLODE(actedIn) EXPLODED_NAMES AS actedIn_lve
+WHERE isCalled_lve IS NOT NULL AND wasBornIn IS NOT NULL AND actedIn_lve IS NOT NULL)
+AS Table_1 ON (Table_1.wasBornIn = Table_3.s)
+JOIN
+(SELECT s, isCalled_lve, wasBornIn, actedIn_lve FROM actedIn
+LATERAL VIEW EXPLODE(isCalled) EXPLODED_NAMES AS isCalled_lve
+LATERAL VIEW EXPLODE(actedIn) EXPLODED_NAMES AS actedIn_lve
+WHERE isCalled_lve IS NOT NULL AND wasBornIn IS NOT NULL AND actedIn_lve IS NOT NULL)
+AS Table_2 ON (Table_2.actedIn_lve = Table_1.actedIn_lve)
+JOIN
+(SELECT s FROM isLocatedIn
+LATERAL VIEW EXPLODE(isLocatedIn) EXPLODED_NAMES AS isLocatedIn_lve
+WHERE isLocatedIn_lve = 'United_States')
+AS Table_4 ON (Table_4.s = Table_2.wasBornIn)
+WHERE Table_1.s != Table_2.s
+#####
+q4(2)
+>>>>>
+actedIn	isLocatedIn
+>>>>>
+SELECT DISTINCT Table_1.isCalled_lve AS name1, Table_2.isCalled_lve AS name2 FROM
+(SELECT s FROM isLocatedIn
+LATERAL VIEW EXPLODE(isLocatedIn) EXPLODED_NAMES AS isLocatedIn_lve
+WHERE isLocatedIn_lve = 'United_States')
+AS Table_3
+JOIN
+(SELECT s, isCalled_lve, wasBornIn, actedIn_lve FROM actedIn
+LATERAL VIEW EXPLODE(isCalled) EXPLODED_NAMES AS isCalled_lve
+LATERAL VIEW EXPLODE(actedIn) EXPLODED_NAMES AS actedIn_lve
+WHERE isCalled_lve IS NOT NULL AND wasBornIn IS NOT NULL AND actedIn_lve IS NOT NULL)
+AS Table_1 ON (Table_1.wasBornIn = Table_3.s)
+JOIN
+(SELECT s, isCalled_lve, wasBornIn, actedIn_lve FROM actedIn
+LATERAL VIEW EXPLODE(isCalled) EXPLODED_NAMES AS isCalled_lve
+LATERAL VIEW EXPLODE(actedIn) EXPLODED_NAMES AS actedIn_lve
+WHERE isCalled_lve IS NOT NULL AND wasBornIn IS NOT NULL AND actedIn_lve IS NOT NULL)
+AS Table_2 ON (Table_2.actedIn_lve = Table_1.actedIn_lve)
+JOIN
+(SELECT s FROM isLocatedIn
+LATERAL VIEW EXPLODE(isLocatedIn) EXPLODED_NAMES AS isLocatedIn_lve
+WHERE isLocatedIn_lve = 'United_States')
+AS Table_4 ON (Table_4.s = Table_2.wasBornIn)
+WHERE Table_1.s != Table_2.s
+#####
+q4(3)
+>>>>>
+actedIn	isLocatedIn
+>>>>>
+SELECT DISTINCT Table_1.isCalled_lve AS name1, Table_2.isCalled_lve AS name2 FROM
+(SELECT s FROM isLocatedIn
+LATERAL VIEW EXPLODE(isLocatedIn) EXPLODED_NAMES AS isLocatedIn_lve
+WHERE isLocatedIn_lve = 'United_States')
+AS Table_3
+JOIN
+(SELECT s, isCalled_lve, wasBornIn, actedIn_lve FROM actedIn
+LATERAL VIEW EXPLODE(isCalled) EXPLODED_NAMES AS isCalled_lve
+LATERAL VIEW EXPLODE(actedIn) EXPLODED_NAMES AS actedIn_lve
+WHERE isCalled_lve IS NOT NULL AND wasBornIn IS NOT NULL AND actedIn_lve IS NOT NULL)
+AS Table_1 ON (Table_1.wasBornIn = Table_3.s)
+JOIN
+(SELECT s, isCalled_lve, wasBornIn, actedIn_lve FROM actedIn
+LATERAL VIEW EXPLODE(isCalled) EXPLODED_NAMES AS isCalled_lve
+LATERAL VIEW EXPLODE(actedIn) EXPLODED_NAMES AS actedIn_lve
+WHERE isCalled_lve IS NOT NULL AND wasBornIn IS NOT NULL AND actedIn_lve IS NOT NULL)
+AS Table_2 ON (Table_2.actedIn_lve = Table_1.actedIn_lve)
+JOIN
+(SELECT s FROM isLocatedIn
+LATERAL VIEW EXPLODE(isLocatedIn) EXPLODED_NAMES AS isLocatedIn_lve
+WHERE isLocatedIn_lve = 'United_States')
+AS Table_4 ON (Table_4.s = Table_2.wasBornIn)
+WHERE Table_1.s != Table_2.s
+#####
+q4(4)
+>>>>>
+actedIn	isLocatedIn
+>>>>>
+SELECT DISTINCT Table_1.isCalled_lve AS name1, Table_2.isCalled_lve AS name2 FROM
+(SELECT s FROM isLocatedIn
+LATERAL VIEW EXPLODE(isLocatedIn) EXPLODED_NAMES AS isLocatedIn_lve
+WHERE isLocatedIn_lve = 'United_States')
+AS Table_3
+JOIN
+(SELECT s, isCalled_lve, wasBornIn, actedIn_lve FROM actedIn
+LATERAL VIEW EXPLODE(isCalled) EXPLODED_NAMES AS isCalled_lve
+LATERAL VIEW EXPLODE(actedIn) EXPLODED_NAMES AS actedIn_lve
+WHERE isCalled_lve IS NOT NULL AND wasBornIn IS NOT NULL AND actedIn_lve IS NOT NULL)
+AS Table_1 ON (Table_1.wasBornIn = Table_3.s)
+JOIN
+(SELECT s, isCalled_lve, wasBornIn, actedIn_lve FROM actedIn
+LATERAL VIEW EXPLODE(isCalled) EXPLODED_NAMES AS isCalled_lve
+LATERAL VIEW EXPLODE(actedIn) EXPLODED_NAMES AS actedIn_lve
+WHERE isCalled_lve IS NOT NULL AND wasBornIn IS NOT NULL AND actedIn_lve IS NOT NULL)
+AS Table_2 ON (Table_2.actedIn_lve = Table_1.actedIn_lve)
+JOIN
+(SELECT s FROM isLocatedIn
+LATERAL VIEW EXPLODE(isLocatedIn) EXPLODED_NAMES AS isLocatedIn_lve
+WHERE isLocatedIn_lve = 'United_States')
+AS Table_4 ON (Table_4.s = Table_2.wasBornIn)
+WHERE Table_1.s != Table_2.s
+#####
+q5(1)
+>>>>>
+isMarriedTo	wasBornIn
+>>>>>
+SELECT Table_1.isCalled_lve AS name1, Table_2.isCalled_lve AS name2 FROM
+(SELECT s, isCalled_lve, wasBornIn, isMarriedTo_lve FROM isMarriedTo
+LATERAL VIEW EXPLODE(isCalled) EXPLODED_NAMES AS isCalled_lve
+LATERAL VIEW EXPLODE(isMarriedTo) EXPLODED_NAMES AS isMarriedTo_lve
+WHERE isCalled_lve IS NOT NULL AND wasBornIn IS NOT NULL AND isMarriedTo_lve IS NOT NULL)
+AS Table_1
+JOIN
+(SELECT s, isCalled_lve, wasBornIn FROM wasBornIn
+LATERAL VIEW EXPLODE(isCalled) EXPLODED_NAMES AS isCalled_lve
+WHERE isCalled_lve IS NOT NULL AND wasBornIn IS NOT NULL)
+AS Table_2 ON (Table_2.wasBornIn = Table_1.wasBornIn AND Table_2.s = Table_1.isMarriedTo_lve)
+#####
+q5(2)
+>>>>>
+isMarriedTo	wasBornIn
+>>>>>
+SELECT Table_1.isCalled_lve AS name1, Table_2.isCalled_lve AS name2 FROM
+(SELECT s, isCalled_lve, wasBornIn, isMarriedTo_lve FROM isMarriedTo
+LATERAL VIEW EXPLODE(isCalled) EXPLODED_NAMES AS isCalled_lve
+LATERAL VIEW EXPLODE(isMarriedTo) EXPLODED_NAMES AS isMarriedTo_lve
+WHERE isCalled_lve IS NOT NULL AND wasBornIn IS NOT NULL AND isMarriedTo_lve IS NOT NULL)
+AS Table_1
+JOIN
+(SELECT s, isCalled_lve, wasBornIn FROM wasBornIn
+LATERAL VIEW EXPLODE(isCalled) EXPLODED_NAMES AS isCalled_lve
+WHERE isCalled_lve IS NOT NULL AND wasBornIn IS NOT NULL)
+AS Table_2 ON (Table_2.wasBornIn = Table_1.wasBornIn AND Table_2.s = Table_1.isMarriedTo_lve)
+#####
+q5(3)
+>>>>>
+isMarriedTo	wasBornIn
+>>>>>
+SELECT Table_1.isCalled_lve AS name1, Table_2.isCalled_lve AS name2 FROM
+(SELECT s, isCalled_lve, wasBornIn, isMarriedTo_lve FROM isMarriedTo
+LATERAL VIEW EXPLODE(isCalled) EXPLODED_NAMES AS isCalled_lve
+LATERAL VIEW EXPLODE(isMarriedTo) EXPLODED_NAMES AS isMarriedTo_lve
+WHERE isCalled_lve IS NOT NULL AND wasBornIn IS NOT NULL AND isMarriedTo_lve IS NOT NULL)
+AS Table_1
+JOIN
+(SELECT s, isCalled_lve, wasBornIn FROM wasBornIn
+LATERAL VIEW EXPLODE(isCalled) EXPLODED_NAMES AS isCalled_lve
+WHERE isCalled_lve IS NOT NULL AND wasBornIn IS NOT NULL)
+AS Table_2 ON (Table_2.wasBornIn = Table_1.wasBornIn AND Table_2.s = Table_1.isMarriedTo_lve)
+#####
+q5(4)
+>>>>>
+isMarriedTo	wasBornIn
+>>>>>
+SELECT Table_1.isCalled_lve AS name1, Table_2.isCalled_lve AS name2 FROM
+(SELECT s, isCalled_lve, wasBornIn, isMarriedTo_lve FROM isMarriedTo
+LATERAL VIEW EXPLODE(isCalled) EXPLODED_NAMES AS isCalled_lve
+LATERAL VIEW EXPLODE(isMarriedTo) EXPLODED_NAMES AS isMarriedTo_lve
+WHERE isCalled_lve IS NOT NULL AND wasBornIn IS NOT NULL AND isMarriedTo_lve IS NOT NULL)
+AS Table_1
+JOIN
+(SELECT s, isCalled_lve, wasBornIn FROM wasBornIn
+LATERAL VIEW EXPLODE(isCalled) EXPLODED_NAMES AS isCalled_lve
+WHERE isCalled_lve IS NOT NULL AND wasBornIn IS NOT NULL)
+AS Table_2 ON (Table_2.wasBornIn = Table_1.wasBornIn AND Table_2.s = Table_1.isMarriedTo_lve)

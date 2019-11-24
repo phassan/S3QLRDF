@@ -1,0 +1,1228 @@
+#####
+c1(1)
+>>>>>
+rev_title	sorg_actor	sorg_caption
+>>>>>
+SELECT Table_1.s AS v0, Table_2.s AS v4, Table_3.sorg_actor_lve AS v6, Table_3.s AS v7 FROM
+(SELECT s, sorg_actor_lve, sorg_language_lve FROM sorg_actor
+LATERAL VIEW EXPLODE(sorg_actor) EXPLODED_NAMES AS sorg_actor_lve
+LATERAL VIEW EXPLODE(sorg_language) EXPLODED_NAMES AS sorg_language_lve
+WHERE sorg_actor_lve IS NOT NULL AND sorg_language_lve IS NOT NULL)
+AS Table_3
+JOIN
+(SELECT s, rev_title, rev_reviewer FROM rev_title
+WHERE rev_title IS NOT NULL AND rev_reviewer IS NOT NULL)
+AS Table_2 ON (Table_2.rev_reviewer = Table_3.sorg_actor_lve)
+JOIN
+(SELECT s, sorg_caption, sorg_text, sorg_contentRating, rev_hasReview_lve FROM sorg_caption
+LATERAL VIEW EXPLODE(rev_hasReview) EXPLODED_NAMES AS rev_hasReview_lve
+WHERE sorg_caption IS NOT NULL AND sorg_text IS NOT NULL AND sorg_contentRating IS NOT NULL AND rev_hasReview_lve IS NOT NULL)
+AS Table_1 ON (Table_1.rev_hasReview_lve = Table_2.s)
+#####
+c1(2)
+>>>>>
+rev_title	sorg_actor	sorg_caption
+>>>>>
+SELECT Table_1.s AS v0, Table_2.s AS v4, Table_3.sorg_actor_lve AS v6, Table_3.s AS v7 FROM
+(SELECT s, sorg_actor_lve, sorg_language_lve FROM sorg_actor
+LATERAL VIEW EXPLODE(sorg_actor) EXPLODED_NAMES AS sorg_actor_lve
+LATERAL VIEW EXPLODE(sorg_language) EXPLODED_NAMES AS sorg_language_lve
+WHERE sorg_actor_lve IS NOT NULL AND sorg_language_lve IS NOT NULL)
+AS Table_3
+JOIN
+(SELECT s, rev_title, rev_reviewer FROM rev_title
+WHERE rev_title IS NOT NULL AND rev_reviewer IS NOT NULL)
+AS Table_2 ON (Table_2.rev_reviewer = Table_3.sorg_actor_lve)
+JOIN
+(SELECT s, sorg_caption, sorg_text, sorg_contentRating, rev_hasReview_lve FROM sorg_caption
+LATERAL VIEW EXPLODE(rev_hasReview) EXPLODED_NAMES AS rev_hasReview_lve
+WHERE sorg_caption IS NOT NULL AND sorg_text IS NOT NULL AND sorg_contentRating IS NOT NULL AND rev_hasReview_lve IS NOT NULL)
+AS Table_1 ON (Table_1.rev_hasReview_lve = Table_2.s)
+#####
+c1(3)
+>>>>>
+rev_title	sorg_actor	sorg_caption
+>>>>>
+SELECT Table_1.s AS v0, Table_2.s AS v4, Table_3.sorg_actor_lve AS v6, Table_3.s AS v7 FROM
+(SELECT s, sorg_actor_lve, sorg_language_lve FROM sorg_actor
+LATERAL VIEW EXPLODE(sorg_actor) EXPLODED_NAMES AS sorg_actor_lve
+LATERAL VIEW EXPLODE(sorg_language) EXPLODED_NAMES AS sorg_language_lve
+WHERE sorg_actor_lve IS NOT NULL AND sorg_language_lve IS NOT NULL)
+AS Table_3
+JOIN
+(SELECT s, rev_title, rev_reviewer FROM rev_title
+WHERE rev_title IS NOT NULL AND rev_reviewer IS NOT NULL)
+AS Table_2 ON (Table_2.rev_reviewer = Table_3.sorg_actor_lve)
+JOIN
+(SELECT s, sorg_caption, sorg_text, sorg_contentRating, rev_hasReview_lve FROM sorg_caption
+LATERAL VIEW EXPLODE(rev_hasReview) EXPLODED_NAMES AS rev_hasReview_lve
+WHERE sorg_caption IS NOT NULL AND sorg_text IS NOT NULL AND sorg_contentRating IS NOT NULL AND rev_hasReview_lve IS NOT NULL)
+AS Table_1 ON (Table_1.rev_hasReview_lve = Table_2.s)
+#####
+c1(4)
+>>>>>
+rev_title	sorg_actor	sorg_caption
+>>>>>
+SELECT Table_1.s AS v0, Table_2.s AS v4, Table_3.sorg_actor_lve AS v6, Table_3.s AS v7 FROM
+(SELECT s, sorg_actor_lve, sorg_language_lve FROM sorg_actor
+LATERAL VIEW EXPLODE(sorg_actor) EXPLODED_NAMES AS sorg_actor_lve
+LATERAL VIEW EXPLODE(sorg_language) EXPLODED_NAMES AS sorg_language_lve
+WHERE sorg_actor_lve IS NOT NULL AND sorg_language_lve IS NOT NULL)
+AS Table_3
+JOIN
+(SELECT s, rev_title, rev_reviewer FROM rev_title
+WHERE rev_title IS NOT NULL AND rev_reviewer IS NOT NULL)
+AS Table_2 ON (Table_2.rev_reviewer = Table_3.sorg_actor_lve)
+JOIN
+(SELECT s, sorg_caption, sorg_text, sorg_contentRating, rev_hasReview_lve FROM sorg_caption
+LATERAL VIEW EXPLODE(rev_hasReview) EXPLODED_NAMES AS rev_hasReview_lve
+WHERE sorg_caption IS NOT NULL AND sorg_text IS NOT NULL AND sorg_contentRating IS NOT NULL AND rev_hasReview_lve IS NOT NULL)
+AS Table_1 ON (Table_1.rev_hasReview_lve = Table_2.s)
+#####
+c2(1)
+>>>>>
+rev_hasReview	rev_totalVotes	sorg_eligibleRegion	sorg_jobTitle	sorg_legalName	wsdbm_purchaseFor
+>>>>>
+SELECT Table_1.s AS v0, Table_2.gr_includes AS v3, Table_3.s AS v4, Table_5.rev_hasReview_lve AS v8 FROM
+(SELECT s, gr_includes FROM sorg_eligibleRegion
+LATERAL VIEW EXPLODE(sorg_eligibleRegion) EXPLODED_NAMES AS sorg_eligibleRegion_lve
+WHERE sorg_eligibleRegion_lve = '<wsdbm:Country5>' AND gr_includes IS NOT NULL)
+AS Table_2
+JOIN
+(SELECT s, sorg_legalName, gr_offers_lve FROM sorg_legalName
+LATERAL VIEW EXPLODE(gr_offers) EXPLODED_NAMES AS gr_offers_lve
+WHERE sorg_legalName IS NOT NULL AND gr_offers_lve IS NOT NULL)
+AS Table_1 ON (Table_1.gr_offers_lve = Table_2.s)
+JOIN
+(SELECT s, rev_hasReview_lve FROM rev_hasReview
+LATERAL VIEW EXPLODE(rev_hasReview) EXPLODED_NAMES AS rev_hasReview_lve
+WHERE rev_hasReview_lve IS NOT NULL)
+AS Table_5 ON (Table_5.s = Table_2.gr_includes)
+JOIN
+(SELECT s, rev_totalVotes FROM rev_totalVotes
+WHERE rev_totalVotes IS NOT NULL)
+AS Table_6 ON (Table_6.s = Table_5.rev_hasReview_lve)
+JOIN
+(SELECT s, wsdbm_purchaseFor FROM wsdbm_purchaseFor
+WHERE wsdbm_purchaseFor IS NOT NULL)
+AS Table_4 ON (Table_4.wsdbm_purchaseFor = Table_2.gr_includes AND Table_4.wsdbm_purchaseFor = Table_5.s)
+JOIN
+(SELECT s, sorg_jobTitle, foaf_homepage, wsdbm_makesPurchase_lve FROM sorg_jobTitle
+LATERAL VIEW EXPLODE(wsdbm_makesPurchase) EXPLODED_NAMES AS wsdbm_makesPurchase_lve
+WHERE sorg_jobTitle IS NOT NULL AND foaf_homepage IS NOT NULL AND wsdbm_makesPurchase_lve IS NOT NULL)
+AS Table_3 ON (Table_3.wsdbm_makesPurchase_lve = Table_4.s)
+#####
+c2(2)
+>>>>>
+rev_hasReview	rev_totalVotes	sorg_eligibleRegion	sorg_jobTitle	sorg_legalName	wsdbm_purchaseFor
+>>>>>
+SELECT Table_1.s AS v0, Table_2.gr_includes AS v3, Table_3.s AS v4, Table_5.rev_hasReview_lve AS v8 FROM
+(SELECT s, gr_includes FROM sorg_eligibleRegion
+LATERAL VIEW EXPLODE(sorg_eligibleRegion) EXPLODED_NAMES AS sorg_eligibleRegion_lve
+WHERE sorg_eligibleRegion_lve = '<wsdbm:Country5>' AND gr_includes IS NOT NULL)
+AS Table_2
+JOIN
+(SELECT s, sorg_legalName, gr_offers_lve FROM sorg_legalName
+LATERAL VIEW EXPLODE(gr_offers) EXPLODED_NAMES AS gr_offers_lve
+WHERE sorg_legalName IS NOT NULL AND gr_offers_lve IS NOT NULL)
+AS Table_1 ON (Table_1.gr_offers_lve = Table_2.s)
+JOIN
+(SELECT s, rev_hasReview_lve FROM rev_hasReview
+LATERAL VIEW EXPLODE(rev_hasReview) EXPLODED_NAMES AS rev_hasReview_lve
+WHERE rev_hasReview_lve IS NOT NULL)
+AS Table_5 ON (Table_5.s = Table_2.gr_includes)
+JOIN
+(SELECT s, rev_totalVotes FROM rev_totalVotes
+WHERE rev_totalVotes IS NOT NULL)
+AS Table_6 ON (Table_6.s = Table_5.rev_hasReview_lve)
+JOIN
+(SELECT s, wsdbm_purchaseFor FROM wsdbm_purchaseFor
+WHERE wsdbm_purchaseFor IS NOT NULL)
+AS Table_4 ON (Table_4.wsdbm_purchaseFor = Table_2.gr_includes AND Table_4.wsdbm_purchaseFor = Table_5.s)
+JOIN
+(SELECT s, sorg_jobTitle, foaf_homepage, wsdbm_makesPurchase_lve FROM sorg_jobTitle
+LATERAL VIEW EXPLODE(wsdbm_makesPurchase) EXPLODED_NAMES AS wsdbm_makesPurchase_lve
+WHERE sorg_jobTitle IS NOT NULL AND foaf_homepage IS NOT NULL AND wsdbm_makesPurchase_lve IS NOT NULL)
+AS Table_3 ON (Table_3.wsdbm_makesPurchase_lve = Table_4.s)
+#####
+c2(3)
+>>>>>
+rev_hasReview	rev_totalVotes	sorg_eligibleRegion	sorg_jobTitle	sorg_legalName	wsdbm_purchaseFor
+>>>>>
+SELECT Table_1.s AS v0, Table_2.gr_includes AS v3, Table_3.s AS v4, Table_5.rev_hasReview_lve AS v8 FROM
+(SELECT s, gr_includes FROM sorg_eligibleRegion
+LATERAL VIEW EXPLODE(sorg_eligibleRegion) EXPLODED_NAMES AS sorg_eligibleRegion_lve
+WHERE sorg_eligibleRegion_lve = '<wsdbm:Country5>' AND gr_includes IS NOT NULL)
+AS Table_2
+JOIN
+(SELECT s, sorg_legalName, gr_offers_lve FROM sorg_legalName
+LATERAL VIEW EXPLODE(gr_offers) EXPLODED_NAMES AS gr_offers_lve
+WHERE sorg_legalName IS NOT NULL AND gr_offers_lve IS NOT NULL)
+AS Table_1 ON (Table_1.gr_offers_lve = Table_2.s)
+JOIN
+(SELECT s, rev_hasReview_lve FROM rev_hasReview
+LATERAL VIEW EXPLODE(rev_hasReview) EXPLODED_NAMES AS rev_hasReview_lve
+WHERE rev_hasReview_lve IS NOT NULL)
+AS Table_5 ON (Table_5.s = Table_2.gr_includes)
+JOIN
+(SELECT s, rev_totalVotes FROM rev_totalVotes
+WHERE rev_totalVotes IS NOT NULL)
+AS Table_6 ON (Table_6.s = Table_5.rev_hasReview_lve)
+JOIN
+(SELECT s, wsdbm_purchaseFor FROM wsdbm_purchaseFor
+WHERE wsdbm_purchaseFor IS NOT NULL)
+AS Table_4 ON (Table_4.wsdbm_purchaseFor = Table_2.gr_includes AND Table_4.wsdbm_purchaseFor = Table_5.s)
+JOIN
+(SELECT s, sorg_jobTitle, foaf_homepage, wsdbm_makesPurchase_lve FROM sorg_jobTitle
+LATERAL VIEW EXPLODE(wsdbm_makesPurchase) EXPLODED_NAMES AS wsdbm_makesPurchase_lve
+WHERE sorg_jobTitle IS NOT NULL AND foaf_homepage IS NOT NULL AND wsdbm_makesPurchase_lve IS NOT NULL)
+AS Table_3 ON (Table_3.wsdbm_makesPurchase_lve = Table_4.s)
+#####
+c2(4)
+>>>>>
+rev_hasReview	rev_totalVotes	sorg_eligibleRegion	sorg_jobTitle	sorg_legalName	wsdbm_purchaseFor
+>>>>>
+SELECT Table_1.s AS v0, Table_2.gr_includes AS v3, Table_3.s AS v4, Table_5.rev_hasReview_lve AS v8 FROM
+(SELECT s, gr_includes FROM sorg_eligibleRegion
+LATERAL VIEW EXPLODE(sorg_eligibleRegion) EXPLODED_NAMES AS sorg_eligibleRegion_lve
+WHERE sorg_eligibleRegion_lve = '<wsdbm:Country5>' AND gr_includes IS NOT NULL)
+AS Table_2
+JOIN
+(SELECT s, sorg_legalName, gr_offers_lve FROM sorg_legalName
+LATERAL VIEW EXPLODE(gr_offers) EXPLODED_NAMES AS gr_offers_lve
+WHERE sorg_legalName IS NOT NULL AND gr_offers_lve IS NOT NULL)
+AS Table_1 ON (Table_1.gr_offers_lve = Table_2.s)
+JOIN
+(SELECT s, rev_hasReview_lve FROM rev_hasReview
+LATERAL VIEW EXPLODE(rev_hasReview) EXPLODED_NAMES AS rev_hasReview_lve
+WHERE rev_hasReview_lve IS NOT NULL)
+AS Table_5 ON (Table_5.s = Table_2.gr_includes)
+JOIN
+(SELECT s, rev_totalVotes FROM rev_totalVotes
+WHERE rev_totalVotes IS NOT NULL)
+AS Table_6 ON (Table_6.s = Table_5.rev_hasReview_lve)
+JOIN
+(SELECT s, wsdbm_purchaseFor FROM wsdbm_purchaseFor
+WHERE wsdbm_purchaseFor IS NOT NULL)
+AS Table_4 ON (Table_4.wsdbm_purchaseFor = Table_2.gr_includes AND Table_4.wsdbm_purchaseFor = Table_5.s)
+JOIN
+(SELECT s, sorg_jobTitle, foaf_homepage, wsdbm_makesPurchase_lve FROM sorg_jobTitle
+LATERAL VIEW EXPLODE(wsdbm_makesPurchase) EXPLODED_NAMES AS wsdbm_makesPurchase_lve
+WHERE sorg_jobTitle IS NOT NULL AND foaf_homepage IS NOT NULL AND wsdbm_makesPurchase_lve IS NOT NULL)
+AS Table_3 ON (Table_3.wsdbm_makesPurchase_lve = Table_4.s)
+#####
+c3(1)
+>>>>>
+wsdbm_likes
+>>>>>
+SELECT Table_1.s AS v0 FROM
+(SELECT s, wsdbm_likes_lve, wsdbm_friendOf_lve, dc_Location, foaf_age, wsdbm_gender, foaf_givenName FROM wsdbm_likes
+LATERAL VIEW EXPLODE(wsdbm_likes) EXPLODED_NAMES AS wsdbm_likes_lve
+LATERAL VIEW EXPLODE(wsdbm_friendOf) EXPLODED_NAMES AS wsdbm_friendOf_lve
+WHERE wsdbm_likes_lve IS NOT NULL AND wsdbm_friendOf_lve IS NOT NULL AND dc_Location IS NOT NULL AND foaf_age IS NOT NULL AND wsdbm_gender IS NOT NULL AND foaf_givenName IS NOT NULL)
+AS Table_1
+#####
+c3(2)
+>>>>>
+wsdbm_likes
+>>>>>
+SELECT Table_1.s AS v0 FROM
+(SELECT s, wsdbm_likes_lve, wsdbm_friendOf_lve, dc_Location, foaf_age, wsdbm_gender, foaf_givenName FROM wsdbm_likes
+LATERAL VIEW EXPLODE(wsdbm_likes) EXPLODED_NAMES AS wsdbm_likes_lve
+LATERAL VIEW EXPLODE(wsdbm_friendOf) EXPLODED_NAMES AS wsdbm_friendOf_lve
+WHERE wsdbm_likes_lve IS NOT NULL AND wsdbm_friendOf_lve IS NOT NULL AND dc_Location IS NOT NULL AND foaf_age IS NOT NULL AND wsdbm_gender IS NOT NULL AND foaf_givenName IS NOT NULL)
+AS Table_1
+#####
+c3(3)
+>>>>>
+wsdbm_likes
+>>>>>
+SELECT Table_1.s AS v0 FROM
+(SELECT s, wsdbm_likes_lve, wsdbm_friendOf_lve, dc_Location, foaf_age, wsdbm_gender, foaf_givenName FROM wsdbm_likes
+LATERAL VIEW EXPLODE(wsdbm_likes) EXPLODED_NAMES AS wsdbm_likes_lve
+LATERAL VIEW EXPLODE(wsdbm_friendOf) EXPLODED_NAMES AS wsdbm_friendOf_lve
+WHERE wsdbm_likes_lve IS NOT NULL AND wsdbm_friendOf_lve IS NOT NULL AND dc_Location IS NOT NULL AND foaf_age IS NOT NULL AND wsdbm_gender IS NOT NULL AND foaf_givenName IS NOT NULL)
+AS Table_1
+#####
+c3(4)
+>>>>>
+wsdbm_likes
+>>>>>
+SELECT Table_1.s AS v0 FROM
+(SELECT s, wsdbm_likes_lve, wsdbm_friendOf_lve, dc_Location, foaf_age, wsdbm_gender, foaf_givenName FROM wsdbm_likes
+LATERAL VIEW EXPLODE(wsdbm_likes) EXPLODED_NAMES AS wsdbm_likes_lve
+LATERAL VIEW EXPLODE(wsdbm_friendOf) EXPLODED_NAMES AS wsdbm_friendOf_lve
+WHERE wsdbm_likes_lve IS NOT NULL AND wsdbm_friendOf_lve IS NOT NULL AND dc_Location IS NOT NULL AND foaf_age IS NOT NULL AND wsdbm_gender IS NOT NULL AND foaf_givenName IS NOT NULL)
+AS Table_1
+#####
+f1(1)
+>>>>>
+og_tag	sorg_trailer
+>>>>>
+SELECT Table_2.wsdbm_hasGenre_lve AS v0, Table_1.rdf_type_lve AS v2, Table_2.s AS v3, Table_2.sorg_trailer_lve AS v4, Table_2.sorg_keywords AS v5 FROM
+(SELECT s, sorg_trailer_lve, sorg_keywords, wsdbm_hasGenre_lve FROM sorg_trailer
+LATERAL VIEW EXPLODE(sorg_trailer) EXPLODED_NAMES AS sorg_trailer_lve
+LATERAL VIEW EXPLODE(wsdbm_hasGenre) EXPLODED_NAMES AS wsdbm_hasGenre_lve
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+WHERE sorg_trailer_lve IS NOT NULL AND sorg_keywords IS NOT NULL AND wsdbm_hasGenre_lve IS NOT NULL AND rdf_type_lve = '<wsdbm:ProductCategory2>')
+AS Table_2
+JOIN
+(SELECT s, rdf_type_lve FROM og_tag
+LATERAL VIEW EXPLODE(og_tag) EXPLODED_NAMES AS og_tag_lve
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+WHERE og_tag_lve = '<wsdbm:Topic100>' AND rdf_type_lve IS NOT NULL)
+AS Table_1 ON (Table_1.s = Table_2.wsdbm_hasGenre_lve)
+#####
+f1(2)
+>>>>>
+og_tag	sorg_trailer
+>>>>>
+SELECT Table_2.wsdbm_hasGenre_lve AS v0, Table_1.rdf_type_lve AS v2, Table_2.s AS v3, Table_2.sorg_trailer_lve AS v4, Table_2.sorg_keywords AS v5 FROM
+(SELECT s, sorg_trailer_lve, sorg_keywords, wsdbm_hasGenre_lve FROM sorg_trailer
+LATERAL VIEW EXPLODE(sorg_trailer) EXPLODED_NAMES AS sorg_trailer_lve
+LATERAL VIEW EXPLODE(wsdbm_hasGenre) EXPLODED_NAMES AS wsdbm_hasGenre_lve
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+WHERE sorg_trailer_lve IS NOT NULL AND sorg_keywords IS NOT NULL AND wsdbm_hasGenre_lve IS NOT NULL AND rdf_type_lve = '<wsdbm:ProductCategory2>')
+AS Table_2
+JOIN
+(SELECT s, rdf_type_lve FROM og_tag
+LATERAL VIEW EXPLODE(og_tag) EXPLODED_NAMES AS og_tag_lve
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+WHERE og_tag_lve = '<wsdbm:Topic100>' AND rdf_type_lve IS NOT NULL)
+AS Table_1 ON (Table_1.s = Table_2.wsdbm_hasGenre_lve)
+#####
+f1(3)
+>>>>>
+og_tag	sorg_trailer
+>>>>>
+SELECT Table_2.wsdbm_hasGenre_lve AS v0, Table_1.rdf_type_lve AS v2, Table_2.s AS v3, Table_2.sorg_trailer_lve AS v4, Table_2.sorg_keywords AS v5 FROM
+(SELECT s, sorg_trailer_lve, sorg_keywords, wsdbm_hasGenre_lve FROM sorg_trailer
+LATERAL VIEW EXPLODE(sorg_trailer) EXPLODED_NAMES AS sorg_trailer_lve
+LATERAL VIEW EXPLODE(wsdbm_hasGenre) EXPLODED_NAMES AS wsdbm_hasGenre_lve
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+WHERE sorg_trailer_lve IS NOT NULL AND sorg_keywords IS NOT NULL AND wsdbm_hasGenre_lve IS NOT NULL AND rdf_type_lve = '<wsdbm:ProductCategory2>')
+AS Table_2
+JOIN
+(SELECT s, rdf_type_lve FROM og_tag
+LATERAL VIEW EXPLODE(og_tag) EXPLODED_NAMES AS og_tag_lve
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+WHERE og_tag_lve = '<wsdbm:Topic100>' AND rdf_type_lve IS NOT NULL)
+AS Table_1 ON (Table_1.s = Table_2.wsdbm_hasGenre_lve)
+#####
+f1(4)
+>>>>>
+og_tag	sorg_trailer
+>>>>>
+SELECT Table_2.wsdbm_hasGenre_lve AS v0, Table_1.rdf_type_lve AS v2, Table_2.s AS v3, Table_2.sorg_trailer_lve AS v4, Table_2.sorg_keywords AS v5 FROM
+(SELECT s, sorg_trailer_lve, sorg_keywords, wsdbm_hasGenre_lve FROM sorg_trailer
+LATERAL VIEW EXPLODE(sorg_trailer) EXPLODED_NAMES AS sorg_trailer_lve
+LATERAL VIEW EXPLODE(wsdbm_hasGenre) EXPLODED_NAMES AS wsdbm_hasGenre_lve
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+WHERE sorg_trailer_lve IS NOT NULL AND sorg_keywords IS NOT NULL AND wsdbm_hasGenre_lve IS NOT NULL AND rdf_type_lve = '<wsdbm:ProductCategory2>')
+AS Table_2
+JOIN
+(SELECT s, rdf_type_lve FROM og_tag
+LATERAL VIEW EXPLODE(og_tag) EXPLODED_NAMES AS og_tag_lve
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+WHERE og_tag_lve = '<wsdbm:Topic100>' AND rdf_type_lve IS NOT NULL)
+AS Table_1 ON (Table_1.s = Table_2.wsdbm_hasGenre_lve)
+#####
+f2(1)
+>>>>>
+sorg_caption	sorg_url
+>>>>>
+SELECT Table_1.s AS v0, Table_1.foaf_homepage AS v1, Table_1.og_title AS v2, Table_1.sorg_caption AS v4, Table_1.sorg_description AS v5, Table_2.sorg_url AS v6, Table_2.wsdbm_hits AS v7 FROM
+(SELECT s, foaf_homepage, og_title, rdf_type_lve, sorg_caption, sorg_description FROM sorg_caption
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(wsdbm_hasGenre) EXPLODED_NAMES AS wsdbm_hasGenre_lve
+WHERE foaf_homepage IS NOT NULL AND og_title IS NOT NULL AND rdf_type_lve IS NOT NULL AND sorg_caption IS NOT NULL AND sorg_description IS NOT NULL AND wsdbm_hasGenre_lve = '<wsdbm:SubGenre71>')
+AS Table_1
+JOIN
+(SELECT s, sorg_url, wsdbm_hits FROM sorg_url
+WHERE sorg_url IS NOT NULL AND wsdbm_hits IS NOT NULL)
+AS Table_2 ON (Table_2.s = Table_1.foaf_homepage)
+#####
+f2(2)
+>>>>>
+sorg_caption	sorg_url
+>>>>>
+SELECT Table_1.s AS v0, Table_1.foaf_homepage AS v1, Table_1.og_title AS v2, Table_1.sorg_caption AS v4, Table_1.sorg_description AS v5, Table_2.sorg_url AS v6, Table_2.wsdbm_hits AS v7 FROM
+(SELECT s, foaf_homepage, og_title, rdf_type_lve, sorg_caption, sorg_description FROM sorg_caption
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(wsdbm_hasGenre) EXPLODED_NAMES AS wsdbm_hasGenre_lve
+WHERE foaf_homepage IS NOT NULL AND og_title IS NOT NULL AND rdf_type_lve IS NOT NULL AND sorg_caption IS NOT NULL AND sorg_description IS NOT NULL AND wsdbm_hasGenre_lve = '<wsdbm:SubGenre71>')
+AS Table_1
+JOIN
+(SELECT s, sorg_url, wsdbm_hits FROM sorg_url
+WHERE sorg_url IS NOT NULL AND wsdbm_hits IS NOT NULL)
+AS Table_2 ON (Table_2.s = Table_1.foaf_homepage)
+#####
+f2(3)
+>>>>>
+sorg_caption	sorg_url
+>>>>>
+SELECT Table_1.s AS v0, Table_1.foaf_homepage AS v1, Table_1.og_title AS v2, Table_1.sorg_caption AS v4, Table_1.sorg_description AS v5, Table_2.sorg_url AS v6, Table_2.wsdbm_hits AS v7 FROM
+(SELECT s, foaf_homepage, og_title, rdf_type_lve, sorg_caption, sorg_description FROM sorg_caption
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(wsdbm_hasGenre) EXPLODED_NAMES AS wsdbm_hasGenre_lve
+WHERE foaf_homepage IS NOT NULL AND og_title IS NOT NULL AND rdf_type_lve IS NOT NULL AND sorg_caption IS NOT NULL AND sorg_description IS NOT NULL AND wsdbm_hasGenre_lve = '<wsdbm:SubGenre71>')
+AS Table_1
+JOIN
+(SELECT s, sorg_url, wsdbm_hits FROM sorg_url
+WHERE sorg_url IS NOT NULL AND wsdbm_hits IS NOT NULL)
+AS Table_2 ON (Table_2.s = Table_1.foaf_homepage)
+#####
+f2(4)
+>>>>>
+sorg_caption	sorg_url
+>>>>>
+SELECT Table_1.s AS v0, Table_1.foaf_homepage AS v1, Table_1.og_title AS v2, Table_1.sorg_caption AS v4, Table_1.sorg_description AS v5, Table_2.sorg_url AS v6, Table_2.wsdbm_hits AS v7 FROM
+(SELECT s, foaf_homepage, og_title, rdf_type_lve, sorg_caption, sorg_description FROM sorg_caption
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(wsdbm_hasGenre) EXPLODED_NAMES AS wsdbm_hasGenre_lve
+WHERE foaf_homepage IS NOT NULL AND og_title IS NOT NULL AND rdf_type_lve IS NOT NULL AND sorg_caption IS NOT NULL AND sorg_description IS NOT NULL AND wsdbm_hasGenre_lve = '<wsdbm:SubGenre71>')
+AS Table_1
+JOIN
+(SELECT s, sorg_url, wsdbm_hits FROM sorg_url
+WHERE sorg_url IS NOT NULL AND wsdbm_hits IS NOT NULL)
+AS Table_2 ON (Table_2.s = Table_1.foaf_homepage)
+#####
+f3(1)
+>>>>>
+sorg_contentSize	wsdbm_makesPurchase	wsdbm_purchaseDate
+>>>>>
+SELECT Table_1.s AS v0, Table_1.sorg_contentRating AS v1, Table_1.sorg_contentSize AS v2, Table_2.s AS v4, Table_3.s AS v5, Table_3.wsdbm_purchaseDate AS v6 FROM
+(SELECT s, sorg_contentRating, sorg_contentSize FROM sorg_contentSize
+LATERAL VIEW EXPLODE(wsdbm_hasGenre) EXPLODED_NAMES AS wsdbm_hasGenre_lve
+WHERE sorg_contentRating IS NOT NULL AND sorg_contentSize IS NOT NULL AND wsdbm_hasGenre_lve = '<wsdbm:SubGenre62>')
+AS Table_1
+JOIN
+(SELECT s, wsdbm_purchaseDate, wsdbm_purchaseFor FROM wsdbm_purchaseDate
+WHERE wsdbm_purchaseDate IS NOT NULL AND wsdbm_purchaseFor IS NOT NULL)
+AS Table_3 ON (Table_3.wsdbm_purchaseFor = Table_1.s)
+JOIN
+(SELECT s, wsdbm_makesPurchase_lve FROM wsdbm_makesPurchase
+LATERAL VIEW EXPLODE(wsdbm_makesPurchase) EXPLODED_NAMES AS wsdbm_makesPurchase_lve
+WHERE wsdbm_makesPurchase_lve IS NOT NULL)
+AS Table_2 ON (Table_2.wsdbm_makesPurchase_lve = Table_3.s)
+#####
+f3(2)
+>>>>>
+sorg_contentSize	wsdbm_makesPurchase	wsdbm_purchaseDate
+>>>>>
+SELECT Table_1.s AS v0, Table_1.sorg_contentRating AS v1, Table_1.sorg_contentSize AS v2, Table_2.s AS v4, Table_3.s AS v5, Table_3.wsdbm_purchaseDate AS v6 FROM
+(SELECT s, sorg_contentRating, sorg_contentSize FROM sorg_contentSize
+LATERAL VIEW EXPLODE(wsdbm_hasGenre) EXPLODED_NAMES AS wsdbm_hasGenre_lve
+WHERE sorg_contentRating IS NOT NULL AND sorg_contentSize IS NOT NULL AND wsdbm_hasGenre_lve = '<wsdbm:SubGenre62>')
+AS Table_1
+JOIN
+(SELECT s, wsdbm_purchaseDate, wsdbm_purchaseFor FROM wsdbm_purchaseDate
+WHERE wsdbm_purchaseDate IS NOT NULL AND wsdbm_purchaseFor IS NOT NULL)
+AS Table_3 ON (Table_3.wsdbm_purchaseFor = Table_1.s)
+JOIN
+(SELECT s, wsdbm_makesPurchase_lve FROM wsdbm_makesPurchase
+LATERAL VIEW EXPLODE(wsdbm_makesPurchase) EXPLODED_NAMES AS wsdbm_makesPurchase_lve
+WHERE wsdbm_makesPurchase_lve IS NOT NULL)
+AS Table_2 ON (Table_2.wsdbm_makesPurchase_lve = Table_3.s)
+#####
+f3(3)
+>>>>>
+sorg_contentSize	wsdbm_makesPurchase	wsdbm_purchaseDate
+>>>>>
+SELECT Table_1.s AS v0, Table_1.sorg_contentRating AS v1, Table_1.sorg_contentSize AS v2, Table_2.s AS v4, Table_3.s AS v5, Table_3.wsdbm_purchaseDate AS v6 FROM
+(SELECT s, sorg_contentRating, sorg_contentSize FROM sorg_contentSize
+LATERAL VIEW EXPLODE(wsdbm_hasGenre) EXPLODED_NAMES AS wsdbm_hasGenre_lve
+WHERE sorg_contentRating IS NOT NULL AND sorg_contentSize IS NOT NULL AND wsdbm_hasGenre_lve = '<wsdbm:SubGenre62>')
+AS Table_1
+JOIN
+(SELECT s, wsdbm_purchaseDate, wsdbm_purchaseFor FROM wsdbm_purchaseDate
+WHERE wsdbm_purchaseDate IS NOT NULL AND wsdbm_purchaseFor IS NOT NULL)
+AS Table_3 ON (Table_3.wsdbm_purchaseFor = Table_1.s)
+JOIN
+(SELECT s, wsdbm_makesPurchase_lve FROM wsdbm_makesPurchase
+LATERAL VIEW EXPLODE(wsdbm_makesPurchase) EXPLODED_NAMES AS wsdbm_makesPurchase_lve
+WHERE wsdbm_makesPurchase_lve IS NOT NULL)
+AS Table_2 ON (Table_2.wsdbm_makesPurchase_lve = Table_3.s)
+#####
+f3(4)
+>>>>>
+sorg_contentSize	wsdbm_makesPurchase	wsdbm_purchaseDate
+>>>>>
+SELECT Table_1.s AS v0, Table_1.sorg_contentRating AS v1, Table_1.sorg_contentSize AS v2, Table_2.s AS v4, Table_3.s AS v5, Table_3.wsdbm_purchaseDate AS v6 FROM
+(SELECT s, sorg_contentRating, sorg_contentSize FROM sorg_contentSize
+LATERAL VIEW EXPLODE(wsdbm_hasGenre) EXPLODED_NAMES AS wsdbm_hasGenre_lve
+WHERE sorg_contentRating IS NOT NULL AND sorg_contentSize IS NOT NULL AND wsdbm_hasGenre_lve = '<wsdbm:SubGenre62>')
+AS Table_1
+JOIN
+(SELECT s, wsdbm_purchaseDate, wsdbm_purchaseFor FROM wsdbm_purchaseDate
+WHERE wsdbm_purchaseDate IS NOT NULL AND wsdbm_purchaseFor IS NOT NULL)
+AS Table_3 ON (Table_3.wsdbm_purchaseFor = Table_1.s)
+JOIN
+(SELECT s, wsdbm_makesPurchase_lve FROM wsdbm_makesPurchase
+LATERAL VIEW EXPLODE(wsdbm_makesPurchase) EXPLODED_NAMES AS wsdbm_makesPurchase_lve
+WHERE wsdbm_makesPurchase_lve IS NOT NULL)
+AS Table_2 ON (Table_2.wsdbm_makesPurchase_lve = Table_3.s)
+#####
+f4(1)
+>>>>>
+gr_includes	sorg_contentSize	sorg_url	wsdbm_likes
+>>>>>
+SELECT Table_1.s AS v0, Table_1.foaf_homepage AS v1, Table_2.s AS v2, Table_1.sorg_description AS v4, Table_3.sorg_url AS v5, Table_3.wsdbm_hits AS v6, Table_4.s AS v7, Table_1.sorg_contentSize AS v8 FROM
+(SELECT s, foaf_homepage, sorg_description, sorg_contentSize FROM sorg_contentSize
+LATERAL VIEW EXPLODE(og_tag) EXPLODED_NAMES AS og_tag_lve
+WHERE foaf_homepage IS NOT NULL AND og_tag_lve = '<wsdbm:Topic2>' AND sorg_description IS NOT NULL AND sorg_contentSize IS NOT NULL)
+AS Table_1
+JOIN
+(SELECT s, sorg_url, wsdbm_hits FROM sorg_url
+LATERAL VIEW EXPLODE(sorg_language) EXPLODED_NAMES AS sorg_language_lve
+WHERE sorg_url IS NOT NULL AND wsdbm_hits IS NOT NULL AND sorg_language_lve = '<wsdbm:Language0>')
+AS Table_3 ON (Table_3.s = Table_1.foaf_homepage)
+JOIN
+(SELECT s, wsdbm_likes_lve FROM wsdbm_likes
+LATERAL VIEW EXPLODE(wsdbm_likes) EXPLODED_NAMES AS wsdbm_likes_lve
+WHERE wsdbm_likes_lve IS NOT NULL)
+AS Table_4 ON (Table_4.wsdbm_likes_lve = Table_1.s)
+JOIN
+(SELECT s, gr_includes FROM gr_includes
+WHERE gr_includes IS NOT NULL)
+AS Table_2 ON (Table_2.gr_includes = Table_1.s AND Table_2.gr_includes = Table_4.wsdbm_likes_lve)
+#####
+f4(2)
+>>>>>
+gr_includes	sorg_contentSize	sorg_url	wsdbm_likes
+>>>>>
+SELECT Table_1.s AS v0, Table_1.foaf_homepage AS v1, Table_2.s AS v2, Table_1.sorg_description AS v4, Table_3.sorg_url AS v5, Table_3.wsdbm_hits AS v6, Table_4.s AS v7, Table_1.sorg_contentSize AS v8 FROM
+(SELECT s, foaf_homepage, sorg_description, sorg_contentSize FROM sorg_contentSize
+LATERAL VIEW EXPLODE(og_tag) EXPLODED_NAMES AS og_tag_lve
+WHERE foaf_homepage IS NOT NULL AND og_tag_lve = '<wsdbm:Topic2>' AND sorg_description IS NOT NULL AND sorg_contentSize IS NOT NULL)
+AS Table_1
+JOIN
+(SELECT s, sorg_url, wsdbm_hits FROM sorg_url
+LATERAL VIEW EXPLODE(sorg_language) EXPLODED_NAMES AS sorg_language_lve
+WHERE sorg_url IS NOT NULL AND wsdbm_hits IS NOT NULL AND sorg_language_lve = '<wsdbm:Language0>')
+AS Table_3 ON (Table_3.s = Table_1.foaf_homepage)
+JOIN
+(SELECT s, wsdbm_likes_lve FROM wsdbm_likes
+LATERAL VIEW EXPLODE(wsdbm_likes) EXPLODED_NAMES AS wsdbm_likes_lve
+WHERE wsdbm_likes_lve IS NOT NULL)
+AS Table_4 ON (Table_4.wsdbm_likes_lve = Table_1.s)
+JOIN
+(SELECT s, gr_includes FROM gr_includes
+WHERE gr_includes IS NOT NULL)
+AS Table_2 ON (Table_2.gr_includes = Table_1.s AND Table_2.gr_includes = Table_4.wsdbm_likes_lve)
+#####
+f4(3)
+>>>>>
+gr_includes	sorg_contentSize	sorg_url	wsdbm_likes
+>>>>>
+SELECT Table_1.s AS v0, Table_1.foaf_homepage AS v1, Table_2.s AS v2, Table_1.sorg_description AS v4, Table_3.sorg_url AS v5, Table_3.wsdbm_hits AS v6, Table_4.s AS v7, Table_1.sorg_contentSize AS v8 FROM
+(SELECT s, foaf_homepage, sorg_description, sorg_contentSize FROM sorg_contentSize
+LATERAL VIEW EXPLODE(og_tag) EXPLODED_NAMES AS og_tag_lve
+WHERE foaf_homepage IS NOT NULL AND og_tag_lve = '<wsdbm:Topic2>' AND sorg_description IS NOT NULL AND sorg_contentSize IS NOT NULL)
+AS Table_1
+JOIN
+(SELECT s, sorg_url, wsdbm_hits FROM sorg_url
+LATERAL VIEW EXPLODE(sorg_language) EXPLODED_NAMES AS sorg_language_lve
+WHERE sorg_url IS NOT NULL AND wsdbm_hits IS NOT NULL AND sorg_language_lve = '<wsdbm:Language0>')
+AS Table_3 ON (Table_3.s = Table_1.foaf_homepage)
+JOIN
+(SELECT s, wsdbm_likes_lve FROM wsdbm_likes
+LATERAL VIEW EXPLODE(wsdbm_likes) EXPLODED_NAMES AS wsdbm_likes_lve
+WHERE wsdbm_likes_lve IS NOT NULL)
+AS Table_4 ON (Table_4.wsdbm_likes_lve = Table_1.s)
+JOIN
+(SELECT s, gr_includes FROM gr_includes
+WHERE gr_includes IS NOT NULL)
+AS Table_2 ON (Table_2.gr_includes = Table_1.s AND Table_2.gr_includes = Table_4.wsdbm_likes_lve)
+#####
+f4(4)
+>>>>>
+gr_includes	sorg_contentSize	sorg_url	wsdbm_likes
+>>>>>
+SELECT Table_1.s AS v0, Table_1.foaf_homepage AS v1, Table_2.s AS v2, Table_1.sorg_description AS v4, Table_3.sorg_url AS v5, Table_3.wsdbm_hits AS v6, Table_4.s AS v7, Table_1.sorg_contentSize AS v8 FROM
+(SELECT s, foaf_homepage, sorg_description, sorg_contentSize FROM sorg_contentSize
+LATERAL VIEW EXPLODE(og_tag) EXPLODED_NAMES AS og_tag_lve
+WHERE foaf_homepage IS NOT NULL AND og_tag_lve = '<wsdbm:Topic2>' AND sorg_description IS NOT NULL AND sorg_contentSize IS NOT NULL)
+AS Table_1
+JOIN
+(SELECT s, sorg_url, wsdbm_hits FROM sorg_url
+LATERAL VIEW EXPLODE(sorg_language) EXPLODED_NAMES AS sorg_language_lve
+WHERE sorg_url IS NOT NULL AND wsdbm_hits IS NOT NULL AND sorg_language_lve = '<wsdbm:Language0>')
+AS Table_3 ON (Table_3.s = Table_1.foaf_homepage)
+JOIN
+(SELECT s, wsdbm_likes_lve FROM wsdbm_likes
+LATERAL VIEW EXPLODE(wsdbm_likes) EXPLODED_NAMES AS wsdbm_likes_lve
+WHERE wsdbm_likes_lve IS NOT NULL)
+AS Table_4 ON (Table_4.wsdbm_likes_lve = Table_1.s)
+JOIN
+(SELECT s, gr_includes FROM gr_includes
+WHERE gr_includes IS NOT NULL)
+AS Table_2 ON (Table_2.gr_includes = Table_1.s AND Table_2.gr_includes = Table_4.wsdbm_likes_lve)
+#####
+f5(1)
+>>>>>
+gr_offers	gr_validThrough	og_title
+>>>>>
+SELECT Table_2.gr_offers_lve AS v0, Table_1.gr_includes AS v1, Table_1.gr_price AS v3, Table_1.gr_validThrough AS v4, Table_3.og_title AS v5, Table_3.rdf_type_lve AS v6 FROM
+(SELECT gr_offers_lve FROM gr_offers
+LATERAL VIEW EXPLODE(gr_offers) EXPLODED_NAMES AS gr_offers_lve
+WHERE s = '<wsdbm:Retailer0>' AND gr_offers_lve IS NOT NULL)
+AS Table_2
+JOIN
+(SELECT s, gr_includes, gr_price, gr_validThrough FROM gr_validThrough
+WHERE gr_includes IS NOT NULL AND gr_price IS NOT NULL AND gr_validThrough IS NOT NULL)
+AS Table_1 ON (Table_1.s = Table_2.gr_offers_lve)
+JOIN
+(SELECT s, og_title, rdf_type_lve FROM og_title
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+WHERE og_title IS NOT NULL AND rdf_type_lve IS NOT NULL)
+AS Table_3 ON (Table_3.s = Table_1.gr_includes)
+#####
+f5(2)
+>>>>>
+gr_offers	gr_validThrough	og_title
+>>>>>
+SELECT Table_2.gr_offers_lve AS v0, Table_1.gr_includes AS v1, Table_1.gr_price AS v3, Table_1.gr_validThrough AS v4, Table_3.og_title AS v5, Table_3.rdf_type_lve AS v6 FROM
+(SELECT gr_offers_lve FROM gr_offers
+LATERAL VIEW EXPLODE(gr_offers) EXPLODED_NAMES AS gr_offers_lve
+WHERE s = '<wsdbm:Retailer0>' AND gr_offers_lve IS NOT NULL)
+AS Table_2
+JOIN
+(SELECT s, gr_includes, gr_price, gr_validThrough FROM gr_validThrough
+WHERE gr_includes IS NOT NULL AND gr_price IS NOT NULL AND gr_validThrough IS NOT NULL)
+AS Table_1 ON (Table_1.s = Table_2.gr_offers_lve)
+JOIN
+(SELECT s, og_title, rdf_type_lve FROM og_title
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+WHERE og_title IS NOT NULL AND rdf_type_lve IS NOT NULL)
+AS Table_3 ON (Table_3.s = Table_1.gr_includes)
+#####
+f5(3)
+>>>>>
+gr_offers	gr_validThrough	og_title
+>>>>>
+SELECT Table_2.gr_offers_lve AS v0, Table_1.gr_includes AS v1, Table_1.gr_price AS v3, Table_1.gr_validThrough AS v4, Table_3.og_title AS v5, Table_3.rdf_type_lve AS v6 FROM
+(SELECT gr_offers_lve FROM gr_offers
+LATERAL VIEW EXPLODE(gr_offers) EXPLODED_NAMES AS gr_offers_lve
+WHERE s = '<wsdbm:Retailer0>' AND gr_offers_lve IS NOT NULL)
+AS Table_2
+JOIN
+(SELECT s, gr_includes, gr_price, gr_validThrough FROM gr_validThrough
+WHERE gr_includes IS NOT NULL AND gr_price IS NOT NULL AND gr_validThrough IS NOT NULL)
+AS Table_1 ON (Table_1.s = Table_2.gr_offers_lve)
+JOIN
+(SELECT s, og_title, rdf_type_lve FROM og_title
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+WHERE og_title IS NOT NULL AND rdf_type_lve IS NOT NULL)
+AS Table_3 ON (Table_3.s = Table_1.gr_includes)
+#####
+f5(4)
+>>>>>
+gr_offers	gr_validThrough	og_title
+>>>>>
+SELECT Table_2.gr_offers_lve AS v0, Table_1.gr_includes AS v1, Table_1.gr_price AS v3, Table_1.gr_validThrough AS v4, Table_3.og_title AS v5, Table_3.rdf_type_lve AS v6 FROM
+(SELECT gr_offers_lve FROM gr_offers
+LATERAL VIEW EXPLODE(gr_offers) EXPLODED_NAMES AS gr_offers_lve
+WHERE s = '<wsdbm:Retailer0>' AND gr_offers_lve IS NOT NULL)
+AS Table_2
+JOIN
+(SELECT s, gr_includes, gr_price, gr_validThrough FROM gr_validThrough
+WHERE gr_includes IS NOT NULL AND gr_price IS NOT NULL AND gr_validThrough IS NOT NULL)
+AS Table_1 ON (Table_1.s = Table_2.gr_offers_lve)
+JOIN
+(SELECT s, og_title, rdf_type_lve FROM og_title
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+WHERE og_title IS NOT NULL AND rdf_type_lve IS NOT NULL)
+AS Table_3 ON (Table_3.s = Table_1.gr_includes)
+#####
+l1(1)
+>>>>>
+sorg_caption	wsdbm_subscribes
+>>>>>
+SELECT Table_1.s AS v0, Table_1.wsdbm_likes_lve AS v2, Table_2.sorg_caption AS v3 FROM
+(SELECT s, wsdbm_likes_lve FROM wsdbm_subscribes
+LATERAL VIEW EXPLODE(wsdbm_subscribes) EXPLODED_NAMES AS wsdbm_subscribes_lve
+LATERAL VIEW EXPLODE(wsdbm_likes) EXPLODED_NAMES AS wsdbm_likes_lve
+WHERE wsdbm_subscribes_lve = '<wsdbm:Website37>' AND wsdbm_likes_lve IS NOT NULL)
+AS Table_1
+JOIN
+(SELECT s, sorg_caption FROM sorg_caption
+WHERE sorg_caption IS NOT NULL)
+AS Table_2 ON (Table_2.s = Table_1.wsdbm_likes_lve)
+#####
+l1(2)
+>>>>>
+sorg_caption	wsdbm_subscribes
+>>>>>
+SELECT Table_1.s AS v0, Table_1.wsdbm_likes_lve AS v2, Table_2.sorg_caption AS v3 FROM
+(SELECT s, wsdbm_likes_lve FROM wsdbm_subscribes
+LATERAL VIEW EXPLODE(wsdbm_subscribes) EXPLODED_NAMES AS wsdbm_subscribes_lve
+LATERAL VIEW EXPLODE(wsdbm_likes) EXPLODED_NAMES AS wsdbm_likes_lve
+WHERE wsdbm_subscribes_lve = '<wsdbm:Website37>' AND wsdbm_likes_lve IS NOT NULL)
+AS Table_1
+JOIN
+(SELECT s, sorg_caption FROM sorg_caption
+WHERE sorg_caption IS NOT NULL)
+AS Table_2 ON (Table_2.s = Table_1.wsdbm_likes_lve)
+#####
+l1(3)
+>>>>>
+sorg_caption	wsdbm_subscribes
+>>>>>
+SELECT Table_1.s AS v0, Table_1.wsdbm_likes_lve AS v2, Table_2.sorg_caption AS v3 FROM
+(SELECT s, wsdbm_likes_lve FROM wsdbm_subscribes
+LATERAL VIEW EXPLODE(wsdbm_subscribes) EXPLODED_NAMES AS wsdbm_subscribes_lve
+LATERAL VIEW EXPLODE(wsdbm_likes) EXPLODED_NAMES AS wsdbm_likes_lve
+WHERE wsdbm_subscribes_lve = '<wsdbm:Website37>' AND wsdbm_likes_lve IS NOT NULL)
+AS Table_1
+JOIN
+(SELECT s, sorg_caption FROM sorg_caption
+WHERE sorg_caption IS NOT NULL)
+AS Table_2 ON (Table_2.s = Table_1.wsdbm_likes_lve)
+#####
+l1(4)
+>>>>>
+sorg_caption	wsdbm_subscribes
+>>>>>
+SELECT Table_1.s AS v0, Table_1.wsdbm_likes_lve AS v2, Table_2.sorg_caption AS v3 FROM
+(SELECT s, wsdbm_likes_lve FROM wsdbm_subscribes
+LATERAL VIEW EXPLODE(wsdbm_subscribes) EXPLODED_NAMES AS wsdbm_subscribes_lve
+LATERAL VIEW EXPLODE(wsdbm_likes) EXPLODED_NAMES AS wsdbm_likes_lve
+WHERE wsdbm_subscribes_lve = '<wsdbm:Website37>' AND wsdbm_likes_lve IS NOT NULL)
+AS Table_1
+JOIN
+(SELECT s, sorg_caption FROM sorg_caption
+WHERE sorg_caption IS NOT NULL)
+AS Table_2 ON (Table_2.s = Table_1.wsdbm_likes_lve)
+#####
+l2(1)
+>>>>>
+gn_parentCountry	sorg_nationality
+>>>>>
+SELECT Table_1.gn_parentCountry AS v1, Table_2.s AS v2 FROM
+(SELECT gn_parentCountry FROM gn_parentCountry
+WHERE s = '<wsdbm:City239>' AND gn_parentCountry IS NOT NULL)
+AS Table_1
+JOIN
+(SELECT s, sorg_nationality FROM sorg_nationality
+LATERAL VIEW EXPLODE(wsdbm_likes) EXPLODED_NAMES AS wsdbm_likes_lve
+WHERE wsdbm_likes_lve = '<wsdbm:Product0>' AND sorg_nationality IS NOT NULL)
+AS Table_2 ON (Table_2.sorg_nationality = Table_1.gn_parentCountry)
+#####
+l2(2)
+>>>>>
+gn_parentCountry	sorg_nationality
+>>>>>
+SELECT Table_1.gn_parentCountry AS v1, Table_2.s AS v2 FROM
+(SELECT gn_parentCountry FROM gn_parentCountry
+WHERE s = '<wsdbm:City239>' AND gn_parentCountry IS NOT NULL)
+AS Table_1
+JOIN
+(SELECT s, sorg_nationality FROM sorg_nationality
+LATERAL VIEW EXPLODE(wsdbm_likes) EXPLODED_NAMES AS wsdbm_likes_lve
+WHERE wsdbm_likes_lve = '<wsdbm:Product0>' AND sorg_nationality IS NOT NULL)
+AS Table_2 ON (Table_2.sorg_nationality = Table_1.gn_parentCountry)
+#####
+l2(3)
+>>>>>
+gn_parentCountry	sorg_nationality
+>>>>>
+SELECT Table_1.gn_parentCountry AS v1, Table_2.s AS v2 FROM
+(SELECT gn_parentCountry FROM gn_parentCountry
+WHERE s = '<wsdbm:City239>' AND gn_parentCountry IS NOT NULL)
+AS Table_1
+JOIN
+(SELECT s, sorg_nationality FROM sorg_nationality
+LATERAL VIEW EXPLODE(wsdbm_likes) EXPLODED_NAMES AS wsdbm_likes_lve
+WHERE wsdbm_likes_lve = '<wsdbm:Product0>' AND sorg_nationality IS NOT NULL)
+AS Table_2 ON (Table_2.sorg_nationality = Table_1.gn_parentCountry)
+#####
+l2(4)
+>>>>>
+gn_parentCountry	sorg_nationality
+>>>>>
+SELECT Table_1.gn_parentCountry AS v1, Table_2.s AS v2 FROM
+(SELECT gn_parentCountry FROM gn_parentCountry
+WHERE s = '<wsdbm:City239>' AND gn_parentCountry IS NOT NULL)
+AS Table_1
+JOIN
+(SELECT s, sorg_nationality FROM sorg_nationality
+LATERAL VIEW EXPLODE(wsdbm_likes) EXPLODED_NAMES AS wsdbm_likes_lve
+WHERE wsdbm_likes_lve = '<wsdbm:Product0>' AND sorg_nationality IS NOT NULL)
+AS Table_2 ON (Table_2.sorg_nationality = Table_1.gn_parentCountry)
+#####
+l3(1)
+>>>>>
+wsdbm_likes
+>>>>>
+SELECT Table_1.s AS v0, Table_1.wsdbm_likes_lve AS v1 FROM
+(SELECT s, wsdbm_likes_lve FROM wsdbm_likes
+LATERAL VIEW EXPLODE(wsdbm_likes) EXPLODED_NAMES AS wsdbm_likes_lve
+WHERE wsdbm_likes_lve IS NOT NULL)
+AS Table_1
+#####
+l3(2)
+>>>>>
+wsdbm_likes
+>>>>>
+SELECT Table_1.s AS v0, Table_1.wsdbm_likes_lve AS v1 FROM
+(SELECT s, wsdbm_likes_lve FROM wsdbm_likes
+LATERAL VIEW EXPLODE(wsdbm_likes) EXPLODED_NAMES AS wsdbm_likes_lve
+WHERE wsdbm_likes_lve IS NOT NULL)
+AS Table_1
+#####
+l3(3)
+>>>>>
+wsdbm_likes
+>>>>>
+SELECT Table_1.s AS v0, Table_1.wsdbm_likes_lve AS v1 FROM
+(SELECT s, wsdbm_likes_lve FROM wsdbm_likes
+LATERAL VIEW EXPLODE(wsdbm_likes) EXPLODED_NAMES AS wsdbm_likes_lve
+WHERE wsdbm_likes_lve IS NOT NULL)
+AS Table_1
+#####
+l3(4)
+>>>>>
+wsdbm_likes
+>>>>>
+SELECT Table_1.s AS v0, Table_1.wsdbm_likes_lve AS v1 FROM
+(SELECT s, wsdbm_likes_lve FROM wsdbm_likes
+LATERAL VIEW EXPLODE(wsdbm_likes) EXPLODED_NAMES AS wsdbm_likes_lve
+WHERE wsdbm_likes_lve IS NOT NULL)
+AS Table_1
+#####
+l4(1)
+>>>>>
+sorg_caption
+>>>>>
+SELECT Table_1.s AS v0, Table_1.sorg_caption AS v2 FROM
+(SELECT s, sorg_caption FROM sorg_caption
+LATERAL VIEW EXPLODE(og_tag) EXPLODED_NAMES AS og_tag_lve
+WHERE og_tag_lve = '<wsdbm:Topic83>' AND sorg_caption IS NOT NULL)
+AS Table_1
+#####
+l4(2)
+>>>>>
+sorg_caption
+>>>>>
+SELECT Table_1.s AS v0, Table_1.sorg_caption AS v2 FROM
+(SELECT s, sorg_caption FROM sorg_caption
+LATERAL VIEW EXPLODE(og_tag) EXPLODED_NAMES AS og_tag_lve
+WHERE og_tag_lve = '<wsdbm:Topic83>' AND sorg_caption IS NOT NULL)
+AS Table_1
+#####
+l4(3)
+>>>>>
+sorg_caption
+>>>>>
+SELECT Table_1.s AS v0, Table_1.sorg_caption AS v2 FROM
+(SELECT s, sorg_caption FROM sorg_caption
+LATERAL VIEW EXPLODE(og_tag) EXPLODED_NAMES AS og_tag_lve
+WHERE og_tag_lve = '<wsdbm:Topic83>' AND sorg_caption IS NOT NULL)
+AS Table_1
+#####
+l4(4)
+>>>>>
+sorg_caption
+>>>>>
+SELECT Table_1.s AS v0, Table_1.sorg_caption AS v2 FROM
+(SELECT s, sorg_caption FROM sorg_caption
+LATERAL VIEW EXPLODE(og_tag) EXPLODED_NAMES AS og_tag_lve
+WHERE og_tag_lve = '<wsdbm:Topic83>' AND sorg_caption IS NOT NULL)
+AS Table_1
+#####
+l5(1)
+>>>>>
+gn_parentCountry	sorg_jobTitle
+>>>>>
+SELECT Table_1.s AS v0, Table_1.sorg_jobTitle AS v1, Table_2.gn_parentCountry AS v3 FROM
+(SELECT gn_parentCountry FROM gn_parentCountry
+WHERE s = '<wsdbm:City239>' AND gn_parentCountry IS NOT NULL)
+AS Table_2
+JOIN
+(SELECT s, sorg_jobTitle, sorg_nationality FROM sorg_jobTitle
+WHERE sorg_jobTitle IS NOT NULL AND sorg_nationality IS NOT NULL)
+AS Table_1 ON (Table_1.sorg_nationality = Table_2.gn_parentCountry)
+#####
+l5(2)
+>>>>>
+gn_parentCountry	sorg_jobTitle
+>>>>>
+SELECT Table_1.s AS v0, Table_1.sorg_jobTitle AS v1, Table_2.gn_parentCountry AS v3 FROM
+(SELECT gn_parentCountry FROM gn_parentCountry
+WHERE s = '<wsdbm:City239>' AND gn_parentCountry IS NOT NULL)
+AS Table_2
+JOIN
+(SELECT s, sorg_jobTitle, sorg_nationality FROM sorg_jobTitle
+WHERE sorg_jobTitle IS NOT NULL AND sorg_nationality IS NOT NULL)
+AS Table_1 ON (Table_1.sorg_nationality = Table_2.gn_parentCountry)
+#####
+l5(3)
+>>>>>
+gn_parentCountry	sorg_jobTitle
+>>>>>
+SELECT Table_1.s AS v0, Table_1.sorg_jobTitle AS v1, Table_2.gn_parentCountry AS v3 FROM
+(SELECT gn_parentCountry FROM gn_parentCountry
+WHERE s = '<wsdbm:City239>' AND gn_parentCountry IS NOT NULL)
+AS Table_2
+JOIN
+(SELECT s, sorg_jobTitle, sorg_nationality FROM sorg_jobTitle
+WHERE sorg_jobTitle IS NOT NULL AND sorg_nationality IS NOT NULL)
+AS Table_1 ON (Table_1.sorg_nationality = Table_2.gn_parentCountry)
+#####
+l5(4)
+>>>>>
+gn_parentCountry	sorg_jobTitle
+>>>>>
+SELECT Table_1.s AS v0, Table_1.sorg_jobTitle AS v1, Table_2.gn_parentCountry AS v3 FROM
+(SELECT gn_parentCountry FROM gn_parentCountry
+WHERE s = '<wsdbm:City239>' AND gn_parentCountry IS NOT NULL)
+AS Table_2
+JOIN
+(SELECT s, sorg_jobTitle, sorg_nationality FROM sorg_jobTitle
+WHERE sorg_jobTitle IS NOT NULL AND sorg_nationality IS NOT NULL)
+AS Table_1 ON (Table_1.sorg_nationality = Table_2.gn_parentCountry)
+#####
+s1(1)
+>>>>>
+gr_offers	sorg_priceValidUntil
+>>>>>
+SELECT Table_2.gr_offers_lve AS v0, Table_1.gr_includes AS v1, Table_1.gr_price AS v3, Table_1.gr_serialNumber AS v4, Table_1.gr_validFrom AS v5, Table_1.gr_validThrough AS v6, Table_1.sorg_eligibleQuantity AS v7, Table_1.sorg_eligibleRegion_lve AS v8, Table_1.sorg_priceValidUntil AS v9 FROM
+(SELECT gr_offers_lve FROM gr_offers
+LATERAL VIEW EXPLODE(gr_offers) EXPLODED_NAMES AS gr_offers_lve
+WHERE s = '<wsdbm:Retailer100>' AND gr_offers_lve IS NOT NULL)
+AS Table_2
+JOIN
+(SELECT s, gr_includes, gr_price, gr_serialNumber, gr_validFrom, gr_validThrough, sorg_eligibleQuantity, sorg_eligibleRegion_lve, sorg_priceValidUntil FROM sorg_priceValidUntil
+LATERAL VIEW EXPLODE(sorg_eligibleRegion) EXPLODED_NAMES AS sorg_eligibleRegion_lve
+WHERE gr_includes IS NOT NULL AND gr_price IS NOT NULL AND gr_serialNumber IS NOT NULL AND gr_validFrom IS NOT NULL AND gr_validThrough IS NOT NULL AND sorg_eligibleQuantity IS NOT NULL AND sorg_eligibleRegion_lve IS NOT NULL AND sorg_priceValidUntil IS NOT NULL)
+AS Table_1 ON (Table_1.s = Table_2.gr_offers_lve)
+#####
+s1(2)
+>>>>>
+gr_offers	sorg_priceValidUntil
+>>>>>
+SELECT Table_2.gr_offers_lve AS v0, Table_1.gr_includes AS v1, Table_1.gr_price AS v3, Table_1.gr_serialNumber AS v4, Table_1.gr_validFrom AS v5, Table_1.gr_validThrough AS v6, Table_1.sorg_eligibleQuantity AS v7, Table_1.sorg_eligibleRegion_lve AS v8, Table_1.sorg_priceValidUntil AS v9 FROM
+(SELECT gr_offers_lve FROM gr_offers
+LATERAL VIEW EXPLODE(gr_offers) EXPLODED_NAMES AS gr_offers_lve
+WHERE s = '<wsdbm:Retailer100>' AND gr_offers_lve IS NOT NULL)
+AS Table_2
+JOIN
+(SELECT s, gr_includes, gr_price, gr_serialNumber, gr_validFrom, gr_validThrough, sorg_eligibleQuantity, sorg_eligibleRegion_lve, sorg_priceValidUntil FROM sorg_priceValidUntil
+LATERAL VIEW EXPLODE(sorg_eligibleRegion) EXPLODED_NAMES AS sorg_eligibleRegion_lve
+WHERE gr_includes IS NOT NULL AND gr_price IS NOT NULL AND gr_serialNumber IS NOT NULL AND gr_validFrom IS NOT NULL AND gr_validThrough IS NOT NULL AND sorg_eligibleQuantity IS NOT NULL AND sorg_eligibleRegion_lve IS NOT NULL AND sorg_priceValidUntil IS NOT NULL)
+AS Table_1 ON (Table_1.s = Table_2.gr_offers_lve)
+#####
+s1(3)
+>>>>>
+gr_offers	sorg_priceValidUntil
+>>>>>
+SELECT Table_2.gr_offers_lve AS v0, Table_1.gr_includes AS v1, Table_1.gr_price AS v3, Table_1.gr_serialNumber AS v4, Table_1.gr_validFrom AS v5, Table_1.gr_validThrough AS v6, Table_1.sorg_eligibleQuantity AS v7, Table_1.sorg_eligibleRegion_lve AS v8, Table_1.sorg_priceValidUntil AS v9 FROM
+(SELECT gr_offers_lve FROM gr_offers
+LATERAL VIEW EXPLODE(gr_offers) EXPLODED_NAMES AS gr_offers_lve
+WHERE s = '<wsdbm:Retailer100>' AND gr_offers_lve IS NOT NULL)
+AS Table_2
+JOIN
+(SELECT s, gr_includes, gr_price, gr_serialNumber, gr_validFrom, gr_validThrough, sorg_eligibleQuantity, sorg_eligibleRegion_lve, sorg_priceValidUntil FROM sorg_priceValidUntil
+LATERAL VIEW EXPLODE(sorg_eligibleRegion) EXPLODED_NAMES AS sorg_eligibleRegion_lve
+WHERE gr_includes IS NOT NULL AND gr_price IS NOT NULL AND gr_serialNumber IS NOT NULL AND gr_validFrom IS NOT NULL AND gr_validThrough IS NOT NULL AND sorg_eligibleQuantity IS NOT NULL AND sorg_eligibleRegion_lve IS NOT NULL AND sorg_priceValidUntil IS NOT NULL)
+AS Table_1 ON (Table_1.s = Table_2.gr_offers_lve)
+#####
+s1(4)
+>>>>>
+gr_offers	sorg_priceValidUntil
+>>>>>
+SELECT Table_2.gr_offers_lve AS v0, Table_1.gr_includes AS v1, Table_1.gr_price AS v3, Table_1.gr_serialNumber AS v4, Table_1.gr_validFrom AS v5, Table_1.gr_validThrough AS v6, Table_1.sorg_eligibleQuantity AS v7, Table_1.sorg_eligibleRegion_lve AS v8, Table_1.sorg_priceValidUntil AS v9 FROM
+(SELECT gr_offers_lve FROM gr_offers
+LATERAL VIEW EXPLODE(gr_offers) EXPLODED_NAMES AS gr_offers_lve
+WHERE s = '<wsdbm:Retailer100>' AND gr_offers_lve IS NOT NULL)
+AS Table_2
+JOIN
+(SELECT s, gr_includes, gr_price, gr_serialNumber, gr_validFrom, gr_validThrough, sorg_eligibleQuantity, sorg_eligibleRegion_lve, sorg_priceValidUntil FROM sorg_priceValidUntil
+LATERAL VIEW EXPLODE(sorg_eligibleRegion) EXPLODED_NAMES AS sorg_eligibleRegion_lve
+WHERE gr_includes IS NOT NULL AND gr_price IS NOT NULL AND gr_serialNumber IS NOT NULL AND gr_validFrom IS NOT NULL AND gr_validThrough IS NOT NULL AND sorg_eligibleQuantity IS NOT NULL AND sorg_eligibleRegion_lve IS NOT NULL AND sorg_priceValidUntil IS NOT NULL)
+AS Table_1 ON (Table_1.s = Table_2.gr_offers_lve)
+#####
+s2(1)
+>>>>>
+sorg_nationality
+>>>>>
+SELECT Table_1.s AS v0, Table_1.dc_Location AS v1, Table_1.wsdbm_gender AS v3 FROM
+(SELECT s, dc_Location, wsdbm_gender FROM sorg_nationality
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+WHERE dc_Location IS NOT NULL AND sorg_nationality = '<wsdbm:Country1>' AND wsdbm_gender IS NOT NULL AND rdf_type_lve = '<wsdbm:Role2>')
+AS Table_1
+#####
+s2(2)
+>>>>>
+sorg_nationality
+>>>>>
+SELECT Table_1.s AS v0, Table_1.dc_Location AS v1, Table_1.wsdbm_gender AS v3 FROM
+(SELECT s, dc_Location, wsdbm_gender FROM sorg_nationality
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+WHERE dc_Location IS NOT NULL AND sorg_nationality = '<wsdbm:Country1>' AND wsdbm_gender IS NOT NULL AND rdf_type_lve = '<wsdbm:Role2>')
+AS Table_1
+#####
+s2(3)
+>>>>>
+sorg_nationality
+>>>>>
+SELECT Table_1.s AS v0, Table_1.dc_Location AS v1, Table_1.wsdbm_gender AS v3 FROM
+(SELECT s, dc_Location, wsdbm_gender FROM sorg_nationality
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+WHERE dc_Location IS NOT NULL AND sorg_nationality = '<wsdbm:Country1>' AND wsdbm_gender IS NOT NULL AND rdf_type_lve = '<wsdbm:Role2>')
+AS Table_1
+#####
+s2(4)
+>>>>>
+sorg_nationality
+>>>>>
+SELECT Table_1.s AS v0, Table_1.dc_Location AS v1, Table_1.wsdbm_gender AS v3 FROM
+(SELECT s, dc_Location, wsdbm_gender FROM sorg_nationality
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+WHERE dc_Location IS NOT NULL AND sorg_nationality = '<wsdbm:Country1>' AND wsdbm_gender IS NOT NULL AND rdf_type_lve = '<wsdbm:Role2>')
+AS Table_1
+#####
+s3(1)
+>>>>>
+sorg_publisher
+>>>>>
+SELECT Table_1.s AS v0, Table_1.sorg_caption AS v2, Table_1.wsdbm_hasGenre_lve AS v3, Table_1.sorg_publisher AS v4 FROM
+(SELECT s, sorg_caption, wsdbm_hasGenre_lve, sorg_publisher FROM sorg_publisher
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(wsdbm_hasGenre) EXPLODED_NAMES AS wsdbm_hasGenre_lve
+WHERE rdf_type_lve = '<wsdbm:ProductCategory4>' AND sorg_caption IS NOT NULL AND wsdbm_hasGenre_lve IS NOT NULL AND sorg_publisher IS NOT NULL)
+AS Table_1
+#####
+s3(2)
+>>>>>
+sorg_publisher
+>>>>>
+SELECT Table_1.s AS v0, Table_1.sorg_caption AS v2, Table_1.wsdbm_hasGenre_lve AS v3, Table_1.sorg_publisher AS v4 FROM
+(SELECT s, sorg_caption, wsdbm_hasGenre_lve, sorg_publisher FROM sorg_publisher
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(wsdbm_hasGenre) EXPLODED_NAMES AS wsdbm_hasGenre_lve
+WHERE rdf_type_lve = '<wsdbm:ProductCategory4>' AND sorg_caption IS NOT NULL AND wsdbm_hasGenre_lve IS NOT NULL AND sorg_publisher IS NOT NULL)
+AS Table_1
+#####
+s3(3)
+>>>>>
+sorg_publisher
+>>>>>
+SELECT Table_1.s AS v0, Table_1.sorg_caption AS v2, Table_1.wsdbm_hasGenre_lve AS v3, Table_1.sorg_publisher AS v4 FROM
+(SELECT s, sorg_caption, wsdbm_hasGenre_lve, sorg_publisher FROM sorg_publisher
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(wsdbm_hasGenre) EXPLODED_NAMES AS wsdbm_hasGenre_lve
+WHERE rdf_type_lve = '<wsdbm:ProductCategory4>' AND sorg_caption IS NOT NULL AND wsdbm_hasGenre_lve IS NOT NULL AND sorg_publisher IS NOT NULL)
+AS Table_1
+#####
+s3(4)
+>>>>>
+sorg_publisher
+>>>>>
+SELECT Table_1.s AS v0, Table_1.sorg_caption AS v2, Table_1.wsdbm_hasGenre_lve AS v3, Table_1.sorg_publisher AS v4 FROM
+(SELECT s, sorg_caption, wsdbm_hasGenre_lve, sorg_publisher FROM sorg_publisher
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(wsdbm_hasGenre) EXPLODED_NAMES AS wsdbm_hasGenre_lve
+WHERE rdf_type_lve = '<wsdbm:ProductCategory4>' AND sorg_caption IS NOT NULL AND wsdbm_hasGenre_lve IS NOT NULL AND sorg_publisher IS NOT NULL)
+AS Table_1
+#####
+s4(1)
+>>>>>
+mo_artist	sorg_nationality
+>>>>>
+SELECT Table_1.s AS v0, Table_1.foaf_familyName AS v2, Table_2.s AS v3 FROM
+(SELECT s, foaf_familyName FROM sorg_nationality
+WHERE foaf_age = '<wsdbm:AgeGroup5>' AND foaf_familyName IS NOT NULL AND sorg_nationality = '<wsdbm:Country1>')
+AS Table_1
+JOIN
+(SELECT s, mo_artist FROM mo_artist
+WHERE mo_artist IS NOT NULL)
+AS Table_2 ON (Table_2.mo_artist = Table_1.s)
+#####
+s4(2)
+>>>>>
+mo_artist	sorg_nationality
+>>>>>
+SELECT Table_1.s AS v0, Table_1.foaf_familyName AS v2, Table_2.s AS v3 FROM
+(SELECT s, foaf_familyName FROM sorg_nationality
+WHERE foaf_age = '<wsdbm:AgeGroup5>' AND foaf_familyName IS NOT NULL AND sorg_nationality = '<wsdbm:Country1>')
+AS Table_1
+JOIN
+(SELECT s, mo_artist FROM mo_artist
+WHERE mo_artist IS NOT NULL)
+AS Table_2 ON (Table_2.mo_artist = Table_1.s)
+#####
+s4(3)
+>>>>>
+mo_artist	sorg_nationality
+>>>>>
+SELECT Table_1.s AS v0, Table_1.foaf_familyName AS v2, Table_2.s AS v3 FROM
+(SELECT s, foaf_familyName FROM sorg_nationality
+WHERE foaf_age = '<wsdbm:AgeGroup5>' AND foaf_familyName IS NOT NULL AND sorg_nationality = '<wsdbm:Country1>')
+AS Table_1
+JOIN
+(SELECT s, mo_artist FROM mo_artist
+WHERE mo_artist IS NOT NULL)
+AS Table_2 ON (Table_2.mo_artist = Table_1.s)
+#####
+s4(4)
+>>>>>
+mo_artist	sorg_nationality
+>>>>>
+SELECT Table_1.s AS v0, Table_1.foaf_familyName AS v2, Table_2.s AS v3 FROM
+(SELECT s, foaf_familyName FROM sorg_nationality
+WHERE foaf_age = '<wsdbm:AgeGroup5>' AND foaf_familyName IS NOT NULL AND sorg_nationality = '<wsdbm:Country1>')
+AS Table_1
+JOIN
+(SELECT s, mo_artist FROM mo_artist
+WHERE mo_artist IS NOT NULL)
+AS Table_2 ON (Table_2.mo_artist = Table_1.s)
+#####
+s5(1)
+>>>>>
+sorg_language
+>>>>>
+SELECT Table_1.s AS v0, Table_1.sorg_description AS v2, Table_1.sorg_keywords AS v3 FROM
+(SELECT s, sorg_description, sorg_keywords FROM sorg_language
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(sorg_language) EXPLODED_NAMES AS sorg_language_lve
+WHERE rdf_type_lve = '<wsdbm:ProductCategory2>' AND sorg_description IS NOT NULL AND sorg_keywords IS NOT NULL AND sorg_language_lve = '<wsdbm:Language0>')
+AS Table_1
+#####
+s5(2)
+>>>>>
+sorg_language
+>>>>>
+SELECT Table_1.s AS v0, Table_1.sorg_description AS v2, Table_1.sorg_keywords AS v3 FROM
+(SELECT s, sorg_description, sorg_keywords FROM sorg_language
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(sorg_language) EXPLODED_NAMES AS sorg_language_lve
+WHERE rdf_type_lve = '<wsdbm:ProductCategory2>' AND sorg_description IS NOT NULL AND sorg_keywords IS NOT NULL AND sorg_language_lve = '<wsdbm:Language0>')
+AS Table_1
+#####
+s5(3)
+>>>>>
+sorg_language
+>>>>>
+SELECT Table_1.s AS v0, Table_1.sorg_description AS v2, Table_1.sorg_keywords AS v3 FROM
+(SELECT s, sorg_description, sorg_keywords FROM sorg_language
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(sorg_language) EXPLODED_NAMES AS sorg_language_lve
+WHERE rdf_type_lve = '<wsdbm:ProductCategory2>' AND sorg_description IS NOT NULL AND sorg_keywords IS NOT NULL AND sorg_language_lve = '<wsdbm:Language0>')
+AS Table_1
+#####
+s5(4)
+>>>>>
+sorg_language
+>>>>>
+SELECT Table_1.s AS v0, Table_1.sorg_description AS v2, Table_1.sorg_keywords AS v3 FROM
+(SELECT s, sorg_description, sorg_keywords FROM sorg_language
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(sorg_language) EXPLODED_NAMES AS sorg_language_lve
+WHERE rdf_type_lve = '<wsdbm:ProductCategory2>' AND sorg_description IS NOT NULL AND sorg_keywords IS NOT NULL AND sorg_language_lve = '<wsdbm:Language0>')
+AS Table_1
+#####
+s6(1)
+>>>>>
+mo_conductor
+>>>>>
+SELECT Table_1.s AS v0, Table_1.mo_conductor AS v1, Table_1.rdf_type_lve AS v2 FROM
+(SELECT s, mo_conductor, rdf_type_lve FROM mo_conductor
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(wsdbm_hasGenre) EXPLODED_NAMES AS wsdbm_hasGenre_lve
+WHERE mo_conductor IS NOT NULL AND rdf_type_lve IS NOT NULL AND wsdbm_hasGenre_lve = '<wsdbm:SubGenre63>')
+AS Table_1
+#####
+s6(2)
+>>>>>
+mo_conductor
+>>>>>
+SELECT Table_1.s AS v0, Table_1.mo_conductor AS v1, Table_1.rdf_type_lve AS v2 FROM
+(SELECT s, mo_conductor, rdf_type_lve FROM mo_conductor
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(wsdbm_hasGenre) EXPLODED_NAMES AS wsdbm_hasGenre_lve
+WHERE mo_conductor IS NOT NULL AND rdf_type_lve IS NOT NULL AND wsdbm_hasGenre_lve = '<wsdbm:SubGenre63>')
+AS Table_1
+#####
+s6(3)
+>>>>>
+mo_conductor
+>>>>>
+SELECT Table_1.s AS v0, Table_1.mo_conductor AS v1, Table_1.rdf_type_lve AS v2 FROM
+(SELECT s, mo_conductor, rdf_type_lve FROM mo_conductor
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(wsdbm_hasGenre) EXPLODED_NAMES AS wsdbm_hasGenre_lve
+WHERE mo_conductor IS NOT NULL AND rdf_type_lve IS NOT NULL AND wsdbm_hasGenre_lve = '<wsdbm:SubGenre63>')
+AS Table_1
+#####
+s6(4)
+>>>>>
+mo_conductor
+>>>>>
+SELECT Table_1.s AS v0, Table_1.mo_conductor AS v1, Table_1.rdf_type_lve AS v2 FROM
+(SELECT s, mo_conductor, rdf_type_lve FROM mo_conductor
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+LATERAL VIEW EXPLODE(wsdbm_hasGenre) EXPLODED_NAMES AS wsdbm_hasGenre_lve
+WHERE mo_conductor IS NOT NULL AND rdf_type_lve IS NOT NULL AND wsdbm_hasGenre_lve = '<wsdbm:SubGenre63>')
+AS Table_1
+#####
+s7(1)
+>>>>>
+sorg_text	wsdbm_likes
+>>>>>
+SELECT Table_2.wsdbm_likes_lve AS v0, Table_1.rdf_type_lve AS v1, Table_1.sorg_text AS v2 FROM
+(SELECT wsdbm_likes_lve FROM wsdbm_likes
+LATERAL VIEW EXPLODE(wsdbm_likes) EXPLODED_NAMES AS wsdbm_likes_lve
+WHERE s = '<wsdbm:User62>' AND wsdbm_likes_lve IS NOT NULL)
+AS Table_2
+JOIN
+(SELECT s, rdf_type_lve, sorg_text FROM sorg_text
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+WHERE rdf_type_lve IS NOT NULL AND sorg_text IS NOT NULL)
+AS Table_1 ON (Table_1.s = Table_2.wsdbm_likes_lve)
+#####
+s7(2)
+>>>>>
+sorg_text	wsdbm_likes
+>>>>>
+SELECT Table_2.wsdbm_likes_lve AS v0, Table_1.rdf_type_lve AS v1, Table_1.sorg_text AS v2 FROM
+(SELECT wsdbm_likes_lve FROM wsdbm_likes
+LATERAL VIEW EXPLODE(wsdbm_likes) EXPLODED_NAMES AS wsdbm_likes_lve
+WHERE s = '<wsdbm:User62>' AND wsdbm_likes_lve IS NOT NULL)
+AS Table_2
+JOIN
+(SELECT s, rdf_type_lve, sorg_text FROM sorg_text
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+WHERE rdf_type_lve IS NOT NULL AND sorg_text IS NOT NULL)
+AS Table_1 ON (Table_1.s = Table_2.wsdbm_likes_lve)
+#####
+s7(3)
+>>>>>
+sorg_text	wsdbm_likes
+>>>>>
+SELECT Table_2.wsdbm_likes_lve AS v0, Table_1.rdf_type_lve AS v1, Table_1.sorg_text AS v2 FROM
+(SELECT wsdbm_likes_lve FROM wsdbm_likes
+LATERAL VIEW EXPLODE(wsdbm_likes) EXPLODED_NAMES AS wsdbm_likes_lve
+WHERE s = '<wsdbm:User62>' AND wsdbm_likes_lve IS NOT NULL)
+AS Table_2
+JOIN
+(SELECT s, rdf_type_lve, sorg_text FROM sorg_text
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+WHERE rdf_type_lve IS NOT NULL AND sorg_text IS NOT NULL)
+AS Table_1 ON (Table_1.s = Table_2.wsdbm_likes_lve)
+#####
+s7(4)
+>>>>>
+sorg_text	wsdbm_likes
+>>>>>
+SELECT Table_2.wsdbm_likes_lve AS v0, Table_1.rdf_type_lve AS v1, Table_1.sorg_text AS v2 FROM
+(SELECT wsdbm_likes_lve FROM wsdbm_likes
+LATERAL VIEW EXPLODE(wsdbm_likes) EXPLODED_NAMES AS wsdbm_likes_lve
+WHERE s = '<wsdbm:User62>' AND wsdbm_likes_lve IS NOT NULL)
+AS Table_2
+JOIN
+(SELECT s, rdf_type_lve, sorg_text FROM sorg_text
+LATERAL VIEW EXPLODE(rdf_type) EXPLODED_NAMES AS rdf_type_lve
+WHERE rdf_type_lve IS NOT NULL AND sorg_text IS NOT NULL)
+AS Table_1 ON (Table_1.s = Table_2.wsdbm_likes_lve)

@@ -1,0 +1,17 @@
+BASE <http://yago-knowledge.org/resource#> .
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+SELECT ?name 
+WHERE { 
+?a      isCalled      ?name . 
+?a      rdf:type      ?actor .
+?actor  rdfs:label    "actor" .
+?a      actedIn       ?m1 . 
+?a      directed      ?m2 . 
+?m1     rdf:type      ?movie .
+?movie  rdfs:label    "movie" .
+?m1     isLocatedIn   "Portugal" . 
+?m2     rdf:type      ?movie . 
+?m2     isLocatedIn   "Spain" . 
+}

@@ -1,0 +1,16 @@
+BASE <http://yago-knowledge.org/resource#> .
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+SELECT DISTINCT ?name1 ?name2 
+WHERE { 
+          ?p1     	isCalled      ?name1 .
+          ?p1     	wasBornIn     ?city1 . 
+          ?p1     	actedIn       ?movie . 
+          ?p2     	isCalled      ?name2 .
+          ?p2     	wasBornIn     ?city2 . 
+          ?p2     	actedIn       ?movie . 
+          ?city1    isLocatedIn   "United_States" . 
+          ?city2    isLocatedIn   "United_States" . 
+    FILTER (?p1 != ?p2) 
+}
