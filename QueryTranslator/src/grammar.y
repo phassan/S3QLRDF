@@ -259,9 +259,9 @@ stmt:
                     }
                 } else {
                     if(mva_presents(p)){
-                        selection[key] = " " + value + " AND " + p + "_lve = " + "'" + replace_doublequote(objects.at(objects.size() - 1).first) + "'";
+                        selection[key] = " " + value + " AND " + p + "_lve = " + "'" + (objects.at(objects.size() - 1).first) + "'";
                     } else {
-                        selection[key] = " " + value + " AND " + p + " = " + "'" + replace_doublequote(objects.at(objects.size() - 1).first) + "'";
+                        selection[key] = " " + value + " AND " + p + " = " + "'" + (objects.at(objects.size() - 1).first) + "'";
                     }                    
                 }
             } else {
@@ -269,7 +269,7 @@ stmt:
                 if(subjects.at(subjects.size() - 1).second == "var") {
                  //   selection[key] = "s IS NOT NULL";                    
                 } else {
-                    selection[key] = cat_str_4("s = ", "'", replace_doublequote(subjects.at(subjects.size() - 1).first), "'");
+                    selection[key] = cat_str_4("s = ", "'", (subjects.at(subjects.size() - 1).first), "'");
                 } 
                 if(objects.at(objects.size() - 1).second == "var"){
                     map<string, string>::iterator itos;
@@ -296,15 +296,15 @@ stmt:
                     if(itos2 != selection.end()) {
                         string value = itos2->second;                           
                         if(mva_presents(p)){
-                            selection[key] = value + " AND " + p + "_lve = " + "'" + replace_doublequote(objects.at(objects.size() - 1).first) + "'";
+                            selection[key] = value + " AND " + p + "_lve = " + "'" + (objects.at(objects.size() - 1).first) + "'";
                         } else {
-                            selection[key] = value + " AND " + p + " = " +  "'" + replace_doublequote(objects.at(objects.size() - 1).first) + "'";
+                            selection[key] = value + " AND " + p + " = " +  "'" + (objects.at(objects.size() - 1).first) + "'";
                         }
                     } else {
                         if(mva_presents(p)){
-                            selection[key] = p + "_lve = " + "'" + replace_doublequote(objects.at(objects.size() - 1).first) + "'";
+                            selection[key] = p + "_lve = " + "'" + (objects.at(objects.size() - 1).first) + "'";
                         } else {
-                            selection[key] = p + " = " + "'" + replace_doublequote(objects.at(objects.size() - 1).first) + "'";
+                            selection[key] = p + " = " + "'" + (objects.at(objects.size() - 1).first) + "'";
                         } 
                     }
                 }
