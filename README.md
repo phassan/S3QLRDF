@@ -1,5 +1,5 @@
-# S3QL (SPARQL to Spark SQL)
-S3QL is a distributed Hadoop-based SPARQL query processor for large-scale RDF data implemented on top of Spark. It uses the relational interface of Spark (Spark SQL) for query execution by compiling SPARQL to SQL and comes with a new partitioning schema for RDF called PTP (Property Table Partitioning) that is a modified and extended version of the well-known Property Table schema introduced by Wilkinson et al.
+# S3QLRDF (SPARQL to Spark SQL for RDF)
+S3QLRDF is a distributed Hadoop-based SPARQL query processor for large-scale RDF data implemented on top of Spark. It uses the relational interface of Spark (Spark SQL) for query execution by compiling SPARQL to SQL and comes with a new partitioning schema for RDF called PTP (Property Table Partitioning) that is a modified and extended version of the well-known Property Table schema introduced by Wilkinson et al.
 
 # Requirements
 -	[Apache Hadoop](https://hadoop.apache.org/)
@@ -9,10 +9,10 @@ S3QL is a distributed Hadoop-based SPARQL query processor for large-scale RDF da
 -	[Clang](https://clang.llvm.org/index.html) 3.8
 
 #  How to use it?
-S3QL has three modules: 
+S3QLRDF has three modules: 
 1. **Data Loader** is the module used to load RDF data into HDFS based on PTP storage schema. RDF data have to be in the [N-Triples format](https://www.w3.org/TR/n-triples/). It also generates a statistics file for each RDF dataset.
 
-	  S3QL DataLoader is a maven-scala project.
+	  S3QLRDF DataLoader is a maven-scala project.
 	
 	  INSTALLATION:
 	  ```
@@ -53,7 +53,7 @@ S3QL has three modules:
 	  ```
 
 3. **Query Executor** runs the translated query with Apache Spark.
-    S3QL QueryExecutor is a maven-scala project.
+    S3QLRDF QueryExecutor is a maven-scala project.
 
 	  INSTALLATION:
 	  ```
