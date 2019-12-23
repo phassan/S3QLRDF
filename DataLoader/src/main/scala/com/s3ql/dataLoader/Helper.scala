@@ -27,9 +27,9 @@ object Helper {
     var _predicate = ""
     var _object = ""
     if (fields.length > 2) {
-      _subject = Helper.getParsedField(fields(0), prefixes.value)
-      _predicate = Helper.getParsedField(fields(1), prefixes.value)
-      _object = Helper.getParsedField(fields.drop(2).mkString(" ").stripSuffix(".").trim, prefixes.value)
+      _subject = getParsedField(fields(0), prefixes.value)
+      _predicate = replaceSpacialChar(getParsedField(fields(1), prefixes.value))
+      _object = getParsedField(fields.drop(2).mkString(" ").stripSuffix(".").trim, prefixes.value)
     }
     return Triple(_subject, _predicate, _object)
   }
