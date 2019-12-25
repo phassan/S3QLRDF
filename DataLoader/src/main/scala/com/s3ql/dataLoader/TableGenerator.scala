@@ -37,15 +37,13 @@ object TableGenerator {
 
     val prefixes = Helper.broadcastPrefixes(spark)
     val rdfDF = spark.read.text(_dataset).map(r => Helper.parseDataset(r.mkString, prefixes))
-    val arrayColumns = rdfDF.groupBy("s", "p").agg(count("*").as("rowCount"))
+    val arrayCols = rdfDF.groupBy("s", "p").agg(count("*").as("rowCount"))
       .where($"rowCount" > 1).select("p").distinct.collect.map(row => row.getString(0))
     val aggDF = rdfDF.groupBy("s").pivot("p").agg(collect_list("o"))
-    val stringColumns = aggDF.columns.filter(x => x != "s" && !arrayColumns.contains(x))
-    val ptDF1 = stringColumns.foldLeft(aggDF)((df, x) => df.withColumn(x, col(x)(0)))
-    val ptDF2 = arrayColumns.foldLeft(ptDF1)((df, x) => df.withColumn(x, when(size(col(x)) > 0, col(x)).otherwise(lit(null))))
-    val cols = ptDF2.columns.map(Helper.replaceSpacialChar)
-    val finalPT = ptDF2.toDF(cols: _*)
-    finalPT.write.mode(SaveMode.Append).parquet(Settings.ptDir)
+    val stringCols = aggDF.columns.filter(x => x != "s" && !arrayCols.contains(x))
+    val ptDF = stringCols.foldLeft(aggDF)((df, x) => df.withColumn(x, col(x)(0)))
+    val finalPT = arrayCols.foldLeft(ptDF)((df, x) => df.withColumn(x, when(size(col(x)) > 0, col(x)).otherwise(lit(null))))
+    finalPT.write.mode(SaveMode.Overwrite).parquet(Settings.ptDir)
     println("Done!")
   }
 
@@ -57,46 +55,47 @@ object TableGenerator {
     StatisticWriter.initNewStatisticFile(schema)
 
     var pt: DataFrame = null
+    var props = Array.empty[String]
     try {
       pt = spark.read.parquet(Settings.ptDir)
+      props = pt.columns.filter(x => x != "s")
     } catch {
       case e: Exception => println("Cannot find property table directory! \n"
         + "May be property table is not created, please create property table!!!" + "\n" + e)
     }
 
-    val fields = pt.columns
-    var heavy_load = true
-    if (Settings.light_load == "YES") {
-      heavy_load = false
+    var heavy_load = false
+    if (Settings.light_load == "NO") {
+      heavy_load = true
     }
 
     var tabName = null: String
     var tabNameInit = "$$"
     var rCount = 0: Long
     var tabCount = 0: Int
-    for (i <- 1 to (fields.length - 1)) {
-      var atr = fields(i)
+    var ptpDF: DataFrame = null
+    for (i <- 0 to (props.length - 1)) {
+      var atr = props(i)
 
       if (atr != "") {
-        var fdf = pt.filter(pt(atr).isNotNull)
-        if (!(fdf.head(1).isEmpty)) {
-          tabName = atr
-          if (heavy_load) {
-            // keep all columns of a DataFrame which contain a non-null value
-            fdf.columns.foreach(c => {
-              if (fdf.filter(fdf(c).isNotNull).count() == 0)
-                fdf = fdf.drop(c)
-            })
-            //
-          }
+        ptpDF = pt.filter(pt(atr).isNotNull)
+        tabName = atr
 
-          rCount = fdf.count()
-
-          StatisticWriter.addTableStatistic(tabNameInit, tabName, rCount)
-          StatisticWriter.incSavedTables()
-          fdf.write.mode(SaveMode.Append).parquet(Settings.ptpDir + tabName + ".parquet")
-          tabCount = tabCount + 1
+        if (heavy_load) {
+          // keep all columns of a DataFrame which contain a non-null value
+          props.foreach(c => {
+            if (ptpDF.filter(ptpDF(c).isNotNull).count() == 0)
+              ptpDF = ptpDF.drop(c)
+          })
+          //
         }
+
+        rCount = ptpDF.count()
+
+        StatisticWriter.addTableStatistic(tabNameInit, tabName, rCount)
+        StatisticWriter.incSavedTables()
+        ptpDF.write.mode(SaveMode.Overwrite).parquet(Settings.ptpDir + tabName + ".parquet")
+        tabCount = tabCount + 1
       }
     }
 
@@ -105,11 +104,9 @@ object TableGenerator {
     val arr = str.split("&")
     arr.foreach(e => {
       val se = e.split(",")
-
       if (se(1) == "Array") {
         multivaluedFields ::= se(0)
       }
-
     })
 
     StatisticWriter.closeStatisticFile(multivaluedFields.mkString("\t"), "")
