@@ -18,7 +18,6 @@ object TableGenerator {
   import spark.implicits._
 
   def generateDataSet() = {
-
     if (storage == "PT") {
       generatePT()
     } else if (storage == "PTP") {
@@ -27,7 +26,6 @@ object TableGenerator {
     } else {
       println("Schema not found!")
     }
-
   }
 
   def generatePT() = {
@@ -51,9 +49,8 @@ object TableGenerator {
     println("Creating PTP Tables......")
     Helper.removeDirInHDFS(spark, Settings.ptpDir)
     Helper.createDirInHDFS(spark, Settings.ptpDir)
-
     StatisticWriter.initNewStatisticFile(schema)
-
+    
     var pt: DataFrame = null
     var props = Array.empty[String]
     try {
@@ -76,22 +73,16 @@ object TableGenerator {
     var ptpDF: DataFrame = null
     for (i <- 0 to (props.length - 1)) {
       var atr = props(i)
-
       if (atr != "") {
         ptpDF = pt.filter(pt(atr).isNotNull)
         tabName = atr
-
         if (heavy_load) {
-          // keep all columns of a DataFrame which contain a non-null value
           props.foreach(c => {
             if (ptpDF.filter(ptpDF(c).isNotNull).count() == 0)
               ptpDF = ptpDF.drop(c)
           })
-          //
         }
-
         rCount = ptpDF.count()
-
         StatisticWriter.addTableStatistic(tabNameInit, tabName, rCount)
         StatisticWriter.incSavedTables()
         ptpDF.write.mode(SaveMode.Overwrite).parquet(Settings.ptpDir + tabName + ".parquet")
